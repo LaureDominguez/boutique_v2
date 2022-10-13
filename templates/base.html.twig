@@ -6,14 +6,40 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+        <link href="{{asset('./asset/style.css')}}" rel="stylesheet">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">	<!--Font Awesome 6-->
+            <script src="https://kit.fontawesome.com/267127ee95.js" crossorigin="anonymous"></script>
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
+            <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
+        <header>
+            <nav class="navbar navbar-toggler bg-light">
+                <ul class="nav">
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="index.php?page=shopadmin">Boutique-admin</a></li>
+                    <li><a href="index.php?page=shopuser">Boutique-user</a></li>
+                    <li><a href="index.php?page=contact">Contact</a></li>
+                </ul>
+                <ul class="nav dropdown-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('app_user_new') }}" class="dropdown-item">Création</a></li>
+                            <li><a href="{{ path('app_login') }}" class="dropdown-item">Connexion</a></li>
+                            <li><a href="#" class="dropdown-item">Profil</a></li>
+                            <li class="divider"><hr class="dropdown-divider"></li>
+                            <li><a href="{{ path('app_logout') }}" class="dropdown-item">Déconnexion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
