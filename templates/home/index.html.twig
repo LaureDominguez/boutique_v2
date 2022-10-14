@@ -3,7 +3,17 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<div>
-    <h1>Mangez des pates !</h1>
+<div class="home">
+    {% if app.user %}
+        <h1 class="block-effect" style="--td: 1.2s">
+            <div class="block-reveal" style="--bc: #4040bf; --d: .1s">Bienvenue</div>
+            <div class="block-reveal" style="--bc: #bf4060; --d: .5s">{{ app.user.userIdentifier }} !</div>
+        </h1>
+        {% else %}
+        <h1 class="block-effect" style="--td: 1.2s">
+            <div class="block-reveal" style="--bc: #4040bf; --d: .1s">Mangez</div>
+            <div class="block-reveal" style="--bc: #bf4060; --d: .5s">des pâtes !</div>
+        </h1>
+    {% endif %}
 </div>
 {% endblock %}
