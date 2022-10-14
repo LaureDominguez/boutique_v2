@@ -3,6 +3,15 @@
     color: red;
 }
 
+/*pour desactiver la scrollbar*/
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden
+}
+/* scrollbar de mort*/
+
 .loginPage{
     max-width: 20rem;
     margin: auto;
@@ -16,10 +25,11 @@
 
 .home{
     min-width: 100%;
-    min-height: 95vh;
+    min-height: 100vh;
     background-image: url("https://picsum.photos/1920/1080");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     text-align: center;
     display: flex;
     flex-direction: column;

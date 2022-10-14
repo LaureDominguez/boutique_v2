@@ -1,23 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boutique - user{% endblock %}
+{% block title %}Boutique{% endblock %}
 
 {% block body %}
 <div>
     <h1>Achetez des pates !</h1>
 </div>
-{% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-            </tr>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+        <div class="col">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text">{{ product.price }}</p>
+                </div>
+                <div>
                     <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
+                </div>
+            </div>
+        </div>
+
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+    </div>
 {% endblock %}
