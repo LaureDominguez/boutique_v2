@@ -3,9 +3,28 @@
 {% block title %}Nouvel utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Créer votre compte</h1>
+    <div class="loginPage">
+        <h1 class="h3 mb-3 font-weight-normal">Créer votre compte</h1>
 
-    {{ include('user/_form.html.twig') }}
+        <form method="post">
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+            <div class="mb-3">
+                <label class="form-label" for="inputEmail">Email</label>
+                <input class="form-control" type="email" name="email" id="inputEmail" class="form-control" required autofocus>
+
+                <label class="form-label" for="inputPassword">Mot de passe</label>
+                <input class="form-control" type="password" name="password" id="inputPassword" class="form-control" required>
+
+                <label class="form-label" for="verifpass">Saisir une seconde fois le mot de passe</label><br>
+                <input class="form-control" type="password" id="verifpass" required>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+            <button class="btn btn-lg btn-primary" type="submit">
+                Connexion
+            </button>
+        </form>
+    </div>
 {% endblock %}

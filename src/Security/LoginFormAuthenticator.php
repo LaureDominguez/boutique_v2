@@ -48,12 +48,12 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            //retourne vers la page sur laquelle l'utilisateur a besoin de s'identifier
             return new RedirectResponse($targetPath);
         }
-
-        // For example:
+        //sinon renvois sur la home en étant loggé
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-        
+        //et sinon affiche une erreur
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

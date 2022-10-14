@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique - user{% endblock %}
+
+{% block body %}
+<div>
+    <h1>Achetez des pates !</h1>
+</div>
+{% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+{% endblock %}

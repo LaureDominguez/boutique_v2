@@ -3,13 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
 <div>
     <h1>Mangez des pates !</h1>
-    {% if app.user %}
-        <div class="mb-3">
-            Vous êtes connecté en tant que {{ app.user.userIdentifier }}
-        </div>
-    {% endif %}
 </div>
 {% endblock %}
