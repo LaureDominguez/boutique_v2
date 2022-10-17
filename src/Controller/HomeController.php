@@ -19,10 +19,11 @@ class HomeController extends AbstractController
     }
 
     #[Route('/shop_admin', name: 'app_shop_admin')]
-    public function shop_admin(CategoryRepository $categoryRepository): Response
+    public function shop_admin(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
         return $this->render('shop_admin/index.html.twig', [
-            'categories' => $categoryRepository->findAll()
+            'categories' => $categoryRepository->findAll(),
+            'products' => $productRepository->findAll()
         ]);
     }
 

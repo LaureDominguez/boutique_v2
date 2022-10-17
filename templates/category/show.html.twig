@@ -36,7 +36,7 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Prix</th>
-                {# <th>Actions</th> #}
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -46,10 +46,9 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
-                {# <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-                </td> #}
+                <td>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}">Voir</a>
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -59,6 +58,6 @@
         </tbody>
     </table>
 
-        {# {{ include('product/index.html.twig') }} #}
+        <a class="btn btn-lg btn-primary" href="{{ path('app_product_new') }}">Ajouter un article</a>
     </div>
 {% endblock %}
