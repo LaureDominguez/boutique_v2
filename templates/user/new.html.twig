@@ -3,7 +3,25 @@
 {% block title %}Nouvel utilisateur{% endblock %}
 
 {% block body %}
-    <div class="loginPage">
+
+    <h1>Créer votre compte</h1>
+
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.task) }}
+        </div>
+        <div class="col" id="some-custom-id">
+            {{ form_row(form.dueDate) }}
+        </div>
+    </div>
+{{ form_end(form) }}
+
+    {# <div class="loginPage">
         <h1 class="h3 mb-3 font-weight-normal">Créer votre compte</h1>
 
         <form method="post">
@@ -15,9 +33,9 @@
                 <label class="form-label" for="inputPassword">Mot de passe</label>
                 <input class="form-control" type="password" name="password" id="inputPassword" class="form-control" required>
 
-                <label class="form-label" for="verifpass">Saisir une seconde fois le mot de passe</label><br>
-                <input class="form-control" type="password" id="verifpass" required>
-            </div>
+                {# <label class="form-label" for="verifpass">Saisir une seconde fois le mot de passe</label><br>
+                <input class="form-control" type="password" id="verifpass" required> #}
+            {# </div>
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
             >
@@ -26,5 +44,5 @@
                 Connexion
             </button>
         </form>
-    </div>
+    </div> #}
 {% endblock %}
