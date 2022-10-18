@@ -3,27 +3,26 @@
 {% block title %}Boutique - Admin{% endblock %}
 
 {% block body %}
-    <h1>Categorie : {{ category.name }}</h1>
+    <h1>Gérer la Catégorie : {{ category.name }}</h1>
     <div class="block-category">
-        <h2>Gérer la catégorie :</h2>
+        <h2>{{ category.name }} :</h2>
 
-        <table class="table">
+        <table class="table table-secondary">
             <tbody>
                 <tr>
-                    <th>Id</th>
-                    <td>{{ category.id }}</td>
+                    <th scope="col">#</th>
+                    <td scope="col">{{ category.id }}</td>
                 </tr>
                 <tr>
-                    <th>Nom</th>
-                    <td>{{ category.name }}</td>
+                    <th scope="col">Nom</th>
+                    <td scope="col">{{ category.name }}</td>
                 </tr>
                 <tr>
-                    <th>Image</th>
-                    <td>{{ category.img }}</td>
+                    <th scope="col">Image</th>
+                    <td scope="col">{{ category.img }}</td>
                 </tr>
             </tbody>
         </table>
-
         <div class="groupe-button-option">
             <a class="btn btn-sm btn-secondary" href="{{ path('app_shop_admin') }}">Retour à la liste</a>
 
@@ -34,31 +33,36 @@
     </div>
 
     <div class="block-category">
-        <h2>Liste des produits liés :</h2>
-        <table class="table">
+        <h2>Liste des produits associés :</h2>
+        <table class="table table-secondary table-striped">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>#</th>
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
             {% for product in products  %}
                 <tr>
-                    <td>{{ product.id }}</td>
+                    <th>{{ product.id }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price }}</td>
-                    <td>
-                        <a href="{{ path('app_product_show', {'id': product.id}) }}">Voir</a>
+                    <td class="groupe-button-pic">
+                        <a class="btn btn-sm btn-primary" href="{{ path('app_product_show', {'id': product.id}) }}"><i class="fa-regular fa-eye" title="voir"></i></i></a>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_product_edit', {'id': product.id}) }}"><i class="fa-solid fa-pen-to-square" title="modifier"></i></a>
+                        <form method="post" action="{{ path('app_product_delete', {'id': product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                            <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" title="supprimer"></i></button>
+                        </form>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="5">no records found</td>
+                    <td colspan="5">aucun objet trouvé</td>
                 </tr>
             {% endfor %}
             </tbody>

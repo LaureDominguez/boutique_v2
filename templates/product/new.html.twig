@@ -4,8 +4,7 @@
 
 {% block body %}
     <h1>Créez un nouveau produit</h1>
-
-    {{ include('product/_form.html.twig') }}
-
-    <a class="btn btn-sm btn-secondary" href="{{ path('app_product_index') }}">Retour à la liste</a>
+    <div class="block-category">
+        {{ include('product/_form.html.twig') }}
+    </div>
 {% endblock %}
