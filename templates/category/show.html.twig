@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Categorie : {{ category.name }}</h1>
-    <div>
+    <div class="block-category">
         <h2>Gérer la catégorie :</h2>
 
         <table class="table">
@@ -17,47 +17,54 @@
                     <th>Nom</th>
                     <td>{{ category.name }}</td>
                 </tr>
+                <tr>
+                    <th>Image</th>
+                    <td>{{ category.img }}</td>
+                </tr>
             </tbody>
         </table>
 
-        <a class="btn btn-lg btn-secondary" href="{{ path('app_shop_admin') }}">Retour à la liste</a>
+        <div class="groupe-button-option">
+            <a class="btn btn-sm btn-secondary" href="{{ path('app_shop_admin') }}">Retour à la liste</a>
 
-        <a class="btn btn-lg btn-primary" href="{{ path('app_category_edit', {'id': category.id}) }}">Modifier</a>
+            <a class="btn btn-sm btn-primary" href="{{ path('app_category_edit', {'id': category.id}) }}">Modifier</a>
 
-        {{ include('category/_delete_form.html.twig') }}
+            {{ include('category/_delete_form.html.twig') }}
+        </div>
     </div>
 
-    <div>
+    <div class="block-category">
         <h2>Liste des produits liés :</h2>
         <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products  %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">Voir</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-        <a class="btn btn-lg btn-primary" href="{{ path('app_product_new') }}">Ajouter un article</a>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products  %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}">Voir</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="add-button">
+            <a class="btn btn-sm btn-primary" href="{{ path('app_product_new') }}">Ajouter un article</a>
+        </div>
     </div>
 {% endblock %}

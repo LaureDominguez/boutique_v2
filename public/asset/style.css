@@ -4,12 +4,12 @@
 }
 
 /*pour desactiver la scrollbar*/
-html,
+/* html,
 body {
     margin: 0;
     height: 100%;
     overflow: hidden
-}
+} */
 /* scrollbar de mort*/
 
 .loginPage{
@@ -21,7 +21,13 @@ body {
     text-align: center;
 }
 
-/* Home */
+/*************************All************************/
+
+h1{
+    text-align: center;
+}
+
+/************************* Home *********************/
 
 .home{
     min-width: 100%;
@@ -98,3 +104,27 @@ body {
 }
 
 /* end block-$ */
+
+
+/****************************** Shop Admin ***********************/
+
+.groupe-button-option{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.add-button{
+    display: flex;
+    justify-content: space-around;
+}
+
+.block-category{
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: rgb(200, 200, 200);
+    background-color: rgb(225, 225, 225);
+}

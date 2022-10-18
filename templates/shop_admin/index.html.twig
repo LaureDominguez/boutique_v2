@@ -4,32 +4,65 @@
 
 {% block body %}
     <h1>Administrez des pates !</h1>
-    <ul>
-    {% for category in categories %}
-    <li><a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a></li>
 
-    {% else %}
-        <tr>
-            <td colspan="5">no records found</td>
-        </tr>
-    {% endfor %}
-    </ul>
+    <div class="block-category">
+        <h2>Toutes les catégories :</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Catégories</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for category in categories %}
+                    <tr>
+                        <th scope="row">{{ category.id }}</th>
+                        <td><a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a></td>
+                    </tr>
+                    
 
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="add-button">
+            <a class="btn btn-sm btn-primary" href="{{ path('app_category_new') }}">Ajouter une nouvelle catégorie</a>
+        </div>
+    </div>
+
+{# 
     <h2>Tous les produits :</h2>
-    <ul>
-    {% for product in products %}
-    <li>
-        {{ product.name }} 
-        <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-        <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-    </li>
 
-    {% else %}
-        <tr>
-            <td colspan="5">no records found</td>
-        </tr>
-    {% endfor %}
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="row">#</th>
+                <th scope="row">Nom</th>
+                <th scope="row">Catégorie</th>
+                <th scope="row">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for product in products %}
+                <tr>
+                    <th scope="row">{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>
+                        <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+                        <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody> #}
 {% endblock %}
 
 

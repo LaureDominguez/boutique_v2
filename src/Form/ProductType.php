@@ -31,11 +31,25 @@ class ProductType extends AbstractType
             ->add('category', ChoiceType::class, [
                 "choices"       => $categories,
                 "choice_value"  => "id",
-                "choice_label"  => "name"
+                "choice_label"  => "name",
+                "attr" => ["class" => "form-select"],
+                "label" => "Catégorie"
             ])
-            ->add('name')
-            ->add('description')
-            ->add('price')
+            ->add('name', null, [
+            "attr" => ["class" => "form-control"],
+            "label" => "Nom",
+            "label_attr" => ["class" => "form-label"]
+        ])
+            ->add('description', null, [
+            "attr" => ["class" => "form-control"],
+            "label" => "Description",
+            "label_attr" => ["class" => "form-label"]
+        ])
+            ->add('price', null, [
+            "attr" => ["class" => "form-control"],
+            "label" => "Prix",
+            "label_attr" => ["class" => "form-label"]
+        ])
         ;
     }
 
