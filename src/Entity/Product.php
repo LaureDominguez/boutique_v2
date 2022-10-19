@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -24,6 +26,14 @@ class Product
 
     #[ORM\Column]
     private ?float $price = null;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Gallery::class)]
+    private Collection $gallery;
+
+    public function __construct()
+    {
+        $this->gallery = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,36 @@ class Product
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gallery>
+     */
+    public function getGallery(): Collection
+    {
+        return $this->gallery;
+    }
+
+    public function addGallery(Gallery $gallery): self
+    {
+        if (!$this->gallery->contains($gallery)) {
+            $this->gallery->add($gallery);
+            $gallery->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallery(Gallery $gallery): self
+    {
+        if ($this->gallery->removeElement($gallery)) {
+            // set the owning side to null (unless already changed)
+            if ($gallery->getProduct() === $this) {
+                $gallery->setProduct(null);
+            }
+        }
 
         return $this;
     }
