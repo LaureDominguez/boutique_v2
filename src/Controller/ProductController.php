@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Gallery;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -9,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\GalleryRepository;
 
 #[Route('/product')]
 class ProductController extends AbstractController
@@ -30,7 +32,25 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->save($product, true);
+            $images = $form->get('gallery')->getData();
 
+            // On boucle sur les images
+            foreach ($images as $image) {
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On crée l'image dans la base de données
+                $img = new Gallery();
+                $img->setPicture($fichier);
+                $product->addGallery($img);
+            }
+            $productRepository->save($product, true);
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -41,10 +61,13 @@ class ProductController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    public function show(Product $product, GalleryRepository $galleryRepository): Response
     {
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'gallery' => $galleryRepository->findBy([
+                "product"=> $product
+            ]),
         ]);
     }
 

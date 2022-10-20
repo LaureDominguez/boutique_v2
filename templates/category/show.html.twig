@@ -1,26 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Boutique - Admin{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <h1>Gérer la Catégorie : {{ category.name }}</h1>
+    <div class="block-category">
+        <h2>{{ category.name }} :</h2>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table table-secondary">
+            <tbody>
+                <tr>
+                    <th scope="col">#</th>
+                    <td scope="col">{{ category.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <td scope="col">{{ category.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">Image</th>
+                    <td scope="col">{{ category.img }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="groupe-button-option">
+            <a class="btn btn-sm btn-secondary" href="{{ path('app_shop_admin') }}">Retour à la liste</a>
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
+            <a class="btn btn-sm btn-primary" href="{{ path('app_category_edit', {'id': category.id}) }}">Modifier</a>
 
-    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+            {{ include('category/_delete_form.html.twig') }}
+        </div>
+    </div>
 
-    {{ include('category/_delete_form.html.twig') }}
+    <div class="block-category">
+        <h2>Liste des produits associés :</h2>
+        <table class="table table-secondary table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            {% for product in products  %}
+                <tr>
+                    <th>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                    <td class="groupe-button-pic">
+                        <a class="btn btn-sm btn-primary" href="{{ path('app_product_show', {'id': product.id}) }}"><i class="fa-regular fa-eye" title="voir"></i></i></a>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_product_edit', {'id': product.id}) }}"><i class="fa-solid fa-pen-to-square" title="modifier"></i></a>
+                        <form method="post" action="{{ path('app_product_delete', {'id': product.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                            <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can" title="supprimer"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">aucun objet trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="add-button">
+            <a class="btn btn-sm btn-primary" href="{{ path('app_product_new') }}">Ajouter un article</a>
+        </div>
+    </div>
 {% endblock %}

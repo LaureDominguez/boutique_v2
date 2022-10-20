@@ -27,10 +27,10 @@
                 <ul class="nav">
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Accueil</a></li>
                     {% if app.user %}
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_product_index') }}">Boutique-admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_shop_admin') }}">Boutique-admin</a></li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_shop_user') }}">Boutique</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php?page=contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
                 </ul>
                 
                 {% if not app.user %}
