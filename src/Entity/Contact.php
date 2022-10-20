@@ -6,6 +6,9 @@ use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints;
+use DateTimeImmutable;
+
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
@@ -15,22 +18,37 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Constraints\NotBlank()]
+    #[Constraints\Length(min: 5, max: 50)]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 50)]
+    #[Constraints\NotBlank()]
+    #[Constraints\Length(min: 5, max: 50)]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 100)]
+    #[Constraints\Email()]
+    #[Constraints\Length(min: 5, max: 100)]
     private ?string $email = null;
 
     #[ORM\Column(length: 150)]
+    #[Constraints\NotBlank()]
+    #[Constraints\Length(min: 5, max: 150)]
     private ?string $subject = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Constraints\NotBlank()]
     private ?string $message = null;
 
     #[ORM\Column]
+    #[Constraints\NotBlank()]
     private ?\DateTimeImmutable $createdAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
