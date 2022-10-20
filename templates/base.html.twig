@@ -46,7 +46,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a href="#" class="dropdown-item text-center">Profil</a></li>
+                                    <li><a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="dropdown-item text-center">Profil</a></li>
                                     <li><a href="#" class="dropdown-item text-center">Panier</a></li>
                                     <li class="divider"><hr class="dropdown-divider"></li>
                                     <li><a href="{{ path('app_logout') }}" class="dropdown-item text-center">Déconnexion</a></li>
