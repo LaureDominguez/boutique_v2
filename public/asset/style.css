@@ -27,6 +27,11 @@ h1{
     text-align: center;
 }
 
+img{
+    width: 100%;
+    height: 100%;
+}
+
 /************************* Home *********************/
 
 .home{
@@ -135,4 +140,11 @@ h1{
     border-style: solid;
     border-color: rgb(200, 200, 200);
     background-color: rgb(225, 225, 225);
+}
+
+/****************************** User profil ***********************/
+
+.user{
+    margin: auto;
+    padding: 1rem;
 }

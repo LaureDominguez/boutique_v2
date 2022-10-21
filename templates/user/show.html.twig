@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table class="table">
+<div class="user">
+    <h1>{{ user.email }}</h1>
+    
+    <table class="table table-ligh">
         <tbody>
             <tr>
                 <th>Email</th>
@@ -18,6 +19,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
-
+    <a  class="btn btn-sm btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+</div>
 {% endblock %}

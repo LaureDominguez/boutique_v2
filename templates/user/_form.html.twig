@@ -1,4 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-sm btn-primary">{{ button_label|default('Valider') }}</button>
+    <div class="groupe-button-option">
+        <button class="btn btn-sm btn-primary">{{ button_label|default('Valider') }}</button>
+    </div>
 {{ form_end(form) }}

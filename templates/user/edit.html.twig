@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modifier le compte{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+<div class="user">
+    <h1>Modifier le compte</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_user_show', {'id': user.id}) }}">Annuler</a>
+    {{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
+</div>
 {% endblock %}

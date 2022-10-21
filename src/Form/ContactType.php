@@ -71,7 +71,7 @@ class ContactType extends AbstractType
                 ]
             ])
             ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(),
+                'constraints' => new Recaptcha3(['message' => '{{ errorCodes }}']),
                 'action_name' => 'contact',
                 'locale' => 'fr',
             ])
