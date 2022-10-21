@@ -19,12 +19,12 @@ class Contact
 
     #[ORM\Column(length: 50)]
     #[Constraints\NotBlank()]
-    #[Constraints\Length(min: 5, max: 50)]
+    #[Constraints\Length(min: 2, max: 50)]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 50)]
     #[Constraints\NotBlank()]
-    #[Constraints\Length(min: 5, max: 50)]
+    #[Constraints\Length(min: 2, max: 50)]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 100)]

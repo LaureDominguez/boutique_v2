@@ -12,13 +12,15 @@
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
+            {% if is_granted("ROLE_ADMIN") %}
+                <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
-    <a  class="btn btn-sm btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+    <a class="btn btn-sm btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
 </div>
 {% endblock %}

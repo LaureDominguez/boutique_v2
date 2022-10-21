@@ -7,5 +7,10 @@
     <h1>Modifier le compte</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
+
+    <div class="groupe-button-option">
+        <a class="btn btn-sm btn-secondary" href="{{ path('app_user_show', {'id': user.id}) }}">Annuler</a>
+        <a class="btn btn-sm btn-danger" href="{{ path('app_user_delete', {'id': user.id}) }}">Supprimer le compte</a>
+    </div>
 </div>
 {% endblock %}
