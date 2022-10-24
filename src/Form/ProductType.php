@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Repository\GalleryRepository;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 class ProductType extends AbstractType
 {
     //added "CategoryRepository"
@@ -40,12 +43,12 @@ class ProductType extends AbstractType
 
         $builder
             ->add('category', ChoiceType::class, [
-                "choices"       => $categories,
-                "choice_value"  => "id",
-                "choice_label"  => "name",
-                "attr" => ["class" => "form-select"],
-                "label" => "Catégorie"
-            ])
+            "choices"       => $categories,
+            "choice_value"  => "id",
+            "choice_label"  => "name",
+            "attr" => ["class" => "form-select"],
+            "label" => "Catégorie"
+        ])
             ->add('name', null, [
             "attr" => ["class" => "form-control"],
             "label" => "Nom",
@@ -61,12 +64,26 @@ class ProductType extends AbstractType
             "label" => "Prix",
             "label_attr" => ["class" => "form-label"]
         ])
+            //->add("gallery")
             ->add('gallery', FileType::class, [
-            'label' => false,
-            'multiple' => true,
+            "attr" => ["class" => "form-control"],
+            'label' => "Photo",
+            //'multiple' => true,
             'mapped' => false,
-            'required' => false
+            'required' => false,
+            'constraints' => [
+                new Image([
+                    'maxSize' => '1024k',
+                    'mimeTypes' => [
+                        'image/jpeg',
+                        'image/png',
+                        'image/tiff'
+                    ],
+                    'mimeTypesMessage' => "Merci d'utiliser un format valide (jpeg, png, tiff)",
+                ])
+            ]
         ])
+        // ->add('saveAndAdd', SubmitType::class, ['label' => 'Ajouter'])
         ;
     }
 

@@ -88,6 +88,9 @@ class Product
         return $this;
     }
 
+
+
+
     /**
      * @return Collection<int, Gallery>
      */
@@ -117,4 +120,5 @@ class Product
 
         return $this;
     }
+
 }
