@@ -8,6 +8,24 @@
         <h1>Créez votre compte</h1>
 
         {{ include('user/_form.html.twig') }}
+        
+        <input type="checkbox" onclick="showPass()"> Afficher le mot de passe<br>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function showPass() {
+            var x = document.getElementById("user_password");
+            //var img = document.getElementById("showPass");
+            if (x.type === "password") {
+                    x.type = "text";
+                    //img = '<i class="fa-solid fa-eye-slash"></i>';
+                } else {
+                    x.type = "password";
+                    //img = '<i class="fa-solid fa-eye"></i>';
+                }
+            }
+    </script>
 {% endblock %}

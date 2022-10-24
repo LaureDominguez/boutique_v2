@@ -15,8 +15,8 @@
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 
             <label for="inputPassword">Mot de passe</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-            <input type="checkbox" id ="showPass" onclick="showPass()"> Afficher le mot de passe<br>
+            <input type="password" id="user_password" name="password" class="form-control" required>
+            <input type="checkbox" onclick="showPass()"> Afficher le mot de passe<br>
 
             <input type="hidden" name="_csrf_token"
                 value="{{ csrf_token('authenticate') }}"
@@ -46,17 +46,17 @@
 {% endblock %}
 
 {% block javascripts %}
-            <script>
-                function showPass() {
-                    var x = document.getElementById("inputPassword");
-                    //var img = document.getElementById("showPass");
-                    if (x.type === "password") {
-                            x.type = "text";
-                            //img = '<i class="fa-solid fa-eye-slash"></i>';
-                        } else {
-                            x.type = "password";
-                            //img = '<i class="fa-solid fa-eye"></i>';
-                        }
-                    }
-            </script>
-        {% endblock %}
+    <script>
+        function showPass() {
+            var x = document.getElementById("user_password");
+            //var img = document.getElementById("showPass");
+            if (x.type === "password") {
+                    x.type = "text";
+                    //img = '<i class="fa-solid fa-eye-slash"></i>';
+                } else {
+                    x.type = "password";
+                    //img = '<i class="fa-solid fa-eye"></i>';
+                }
+            }
+    </script>
+{% endblock %}
