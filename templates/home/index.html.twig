@@ -7,7 +7,13 @@
     {% if app.user %}
         <h1 class="block-effect" style="--td: 1.2s">
             <div class="block-reveal" style="--bc: #4040bf; --d: .1s">Bienvenue</div>
-            <div class="block-reveal" style="--bc: #bf4060; --d: .5s">{{ app.user.userIdentifier }} !</div>
+            <div class="block-reveal" style="--bc: #bf4060; --d: .5s">
+                {% if app.user.firstName %}
+                    {{ app.user.firstName }} !
+                {% else %}
+                    {{ app.user.userIdentifier }} !
+                {% endif %}
+            </div>
         </h1>
         {% else %}
         <h1 class="block-effect" style="--td: 1.2s">

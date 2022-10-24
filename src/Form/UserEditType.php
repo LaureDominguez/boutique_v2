@@ -26,14 +26,14 @@ class UserEditType extends AbstractType
                     'class' => 'form-label mb-2'
                 ]
             ])
-            //->add('roles')
-            ->add('password', PasswordType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ],
-                "label" => "Mot de passe",
-                "label_attr" => ["class" => "form-label"],
-            ])
+            // ->add('roles')
+            // ->add('password', PasswordType::class, [
+            //     "attr" => [
+            //         "class" => "form-control"
+            //     ],
+            //     "label" => "Mot de passe",
+            //     "label_attr" => ["class" => "form-label"],
+            // ])
             // ->add('password', CheckboxType::class, [
             //     'label' => 'Show password',
                 

@@ -12,6 +12,26 @@
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Adrese</th>
+                <td>{{ user.address }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ user.city }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ user.cp }}</td>
+            </tr>
             {% if is_granted("ROLE_ADMIN") %}
                 <tr>
                     <th>Roles</th>
