@@ -13,6 +13,7 @@
                     <th>Nom</th>
                     <th>Catégorie</th>
                     <th>Description</th>
+                    <th>Image</th>
                     <th>Prix</th>
                     <th>Actions</th>
                 </tr>
@@ -24,6 +25,7 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.category.name }}</td>
                     <td>{{ product.description }}</td>
+                    <td></td>
                     <td>{{ product.price }}</td>
                     <td class="groupe-button-pic">
                         <a class="btn btn-sm btn-primary" href="{{ path('app_product_show', {'id': product.id}) }}"><i class="fa-regular fa-eye" title="voir"></i></i></a>

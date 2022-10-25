@@ -79,8 +79,9 @@ class ProductController extends AbstractController
     {
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            
             'gallery' => $galleryRepository->findBy([
-                "product" => $product
+                "product" => $product,
             ]),
         ]);
     }
