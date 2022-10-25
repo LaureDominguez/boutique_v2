@@ -145,17 +145,23 @@ img{
 /****************************** Log *****************************/
 
 .loginPage {
-    max-width: 20rem;
+    max-width: 30vw;
     height: 100vh;
     margin: auto;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .loginPage .block{
-    background-color: var(--SelectiveYellow);
+    background-color: var(--OrangeWeb);
     padding: 1rem;
     border-radius: 2%;text-align: center;
+}
+
+.block form>div input{
+    margin-bottom: 1rem;
 }
 
 .btn:not(.nav .btn) {
