@@ -3,8 +3,10 @@
 {% block title %}Modifier le produit{% endblock %}
 
 {% block body %}
-    <h1>Modifier le produit</h1>
-    <div class="block-category">
-        {{ include('product/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <div class="blockPage">
+        <h1>Modifier le produit</h1>
+        <div class="block-category">
+            {{ include('product/_form.html.twig', {'button_label': 'Modifier'}) }}
+        </div>
     </div>
 {% endblock %}

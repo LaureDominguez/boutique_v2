@@ -3,30 +3,30 @@
 {% block title %}Boutique{% endblock %}
 
 {% block body %}
-<div>
-    <h1>Achetez des pates !</h1>
-</div>
+    <div class="blockPage">
+        <h1>Achetez des pates !</h1>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for product in products %}
-        <div class="col">
-            <div class="card">
-                <img src="..." class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
-                    <p class="card-text">{{ product.price }}</p>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}
+                <div class="col">
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text">{{ product.price }}</p>
+                        </div>
+                        <div>
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                </div>
-            </div>
+
+                {% else %}
+                    <tr>
+                        <td colspan="5">aucun objet trouvé</td>
+                    </tr>
+                {% endfor %}
         </div>
-
-            {% else %}
-                <tr>
-                    <td colspan="5">aucun objet trouvé</td>
-                </tr>
-            {% endfor %}
     </div>
 {% endblock %}
