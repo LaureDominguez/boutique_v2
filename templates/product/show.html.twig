@@ -33,17 +33,21 @@
                         </tr>
                         <tr>
                             <th>Image</th>
-                            <td><img src="{{product.picture}}"></td>
+                            <td>
+                                {% for picture in product.gallery %}
+                                    <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}">
+                                {% endfor %}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="groupe-button-option">
-                <a class="btn btn-sm btn-secondary" href="{{ path('app_shop_admin') }}">Retour aux catégories</a>
+                <a class="btn btn-sm" href="{{ path('app_shop_admin') }}">Retour aux catégories</a>
 
-                <a class="btn btn-sm btn-secondary" href="{{ path('app_product_index') }}">Retour à la liste</a>
+                <a class="btn btn-sm" href="{{ path('app_product_index') }}">Retour à la liste</a>
 
-                <a class="btn btn-sm btn-primary" href="{{ path('app_product_edit', {'id': product.id}) }}">Modifier</a>
+                <a class="btn btn-sm" href="{{ path('app_product_edit', {'id': product.id}) }}">Modifier</a>
 
                 {{ include('product/_delete_form.html.twig') }}
             </div>

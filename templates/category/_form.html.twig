@@ -1,7 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="groupe-button-option">
-        <a class="btn btn-sm btn-secondary" href="{{ path('app_shop_admin') }}">Retour à la liste</a>
-        <button class="btn btn-sm btn-primary">{{ button_label|default('Valider') }}</button>
+        <a class="btn btn-sm" href="{{ path('app_shop_admin') }}">Retour à la liste</a>
+        <button class="btn btn-sm">{{ button_label|default('Valider') }}</button>
     </div>
 {{ form_end(form) }}

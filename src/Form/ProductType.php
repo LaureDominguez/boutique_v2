@@ -37,9 +37,6 @@ class ProductType extends AbstractType
         $categories = $this->categoryRepository->findAll();
         /////////////////////
 
-        //added "$galleries"
-        $galleries = $this->galleryRepository->findAll();
-        /////////////////////
 
         $builder
             ->add('category', ChoiceType::class, [
