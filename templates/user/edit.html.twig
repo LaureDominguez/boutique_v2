@@ -3,14 +3,16 @@
 {% block title %}Modifier le compte{% endblock %}
 
 {% block body %}
-<div class="user">
-    <h1>Modifier le compte</h1>
+<div class="blockPage loginPage">
+    <div class="user">
+        <h1>Modifier le compte</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
+        {{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
 
-    <div class="groupe-button-option">
-        <a class="btn btn-sm btn-secondary" href="{{ path('app_user_show', {'id': user.id}) }}">Annuler</a>
-        <a class="btn btn-sm btn-danger" href="{{ path('app_user_delete', {'id': user.id}) }}">Supprimer le compte</a>
+        <div class="groupe-button-option">
+            <a class="btn btn-lg" href="{{ path('app_user_show', {'id': user.id}) }}">Annuler</a>
+            <a class="btn btn-lg" href="{{ path('app_user_delete', {'id': user.id}) }}">Supprimer le compte</a>
+        </div>
     </div>
 </div>
 {% endblock %}

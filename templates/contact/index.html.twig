@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formulaire de contact !{% endblock %}
+{% block title %}Formulaire de contact{% endblock %}
 
 {% block body %}
 
-<div class="container">
-    <h1>Nous contacter</h1>
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message }}
+<div class="blockPage loginPage">
+    <div class="blockContact">
+        <h1 class="h3 mb-3 font-weight-normal">Nous contacter</h1>
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {{ form(form) }}
     </div>
-    {% endfor %}
-    {{ form(form) }}
 </div>
 {% endblock %}

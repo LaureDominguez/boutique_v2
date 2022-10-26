@@ -3,44 +3,52 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-<div class="user">
-    <h1>{{ user.email }}</h1>
-    
-    <table class="table table-ligh">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Prénom</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Adrese</th>
-                <td>{{ user.address }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ user.city }}</td>
-            </tr>
-            <tr>
-                <th>Code Postal</th>
-                <td>{{ user.cp }}</td>
-            </tr>
-            {% if is_granted("ROLE_ADMIN") %}
-                <tr>
-                    <th>Roles</th>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                </tr>
+<div class="blockPage loginPage">
+    <div class="user">
+        <h1 class="h3 mb-3 font-weight-normal">
+            {% if app.user.firstName %}
+                    {{ app.user.firstName }}
+                {% else %}
+                    {{ app.user.userIdentifier }}
             {% endif %}
-        </tbody>
-    </table>
+        </h1>
+        
+        <table class="table table-ligh">
+            <tbody>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ user.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ user.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>Adrese</th>
+                    <td>{{ user.address }}</td>
+                </tr>
+                <tr>
+                    <th>Ville</th>
+                    <td>{{ user.city }}</td>
+                </tr>
+                <tr>
+                    <th>Code Postal</th>
+                    <td>{{ user.cp }}</td>
+                </tr>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <tr>
+                        <th>Roles</th>
+                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
 
-    <a class="btn btn-sm btn-primary" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+        <a class="btn btn-lg" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+    </div>
 </div>
 {% endblock %}

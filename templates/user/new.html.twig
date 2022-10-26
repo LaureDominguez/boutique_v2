@@ -4,11 +4,12 @@
 
 {% block body %}
 
-    <div class="loginPage">
-        <h1>Créez votre compte</h1>
+    <div class="blockPage loginPage">
+        <div class="block">
+            <h1 class="h3 mb-3 font-weight-normal">Créez votre compte</h1>
 
-        {{ include('user/_form.html.twig') }}
-        
+            {{ include('user/_form.html.twig') }}
+        </div>
     </div>
 
 {% endblock %}
