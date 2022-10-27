@@ -28,9 +28,13 @@ html, body {
     cursor: default;
 }
 
-h1, h2, h3, h4, h5, p, a, ul, li, th, td{
+h4, h5, a, ul, li, th, td{
     color: var(--DarkRed);
     text-transform: capitalize;
+}
+
+h1, h2, h3, p{
+    color: var(--DarkRed);
 }
 
 h1{

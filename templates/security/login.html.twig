@@ -17,8 +17,10 @@
                 </div>
                 <div>
                     <label for="inputPassword">Mot de passe</label>
+                    {% block show_hide_password %}
                     <input type="password" id="user_password" name="password" class="form-control" required>
-                    <input type="checkbox" onclick="showPass()"> Afficher le mot de passe<br>
+                    {% endblock show_hide_password %}
+                    {# <input type="checkbox" onclick="showPass()"> Afficher le mot de passe<br> #}
                 </div>
 
                 <input type="hidden" name="_csrf_token"
@@ -49,7 +51,7 @@
     
 {% endblock %}
 
-{% block javascripts %}
+{# {% block javascripts %}
     <script>
         function showPass() {
             var x = document.getElementById("user_password");
@@ -63,4 +65,4 @@
                 }
             }
     </script>
-{% endblock %}
+{% endblock %} #}

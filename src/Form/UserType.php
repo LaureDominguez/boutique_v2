@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 //added "PasswordType" path
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use App\Form\ShowHidePasswordType; // add
 
 class UserType extends AbstractType
 {
@@ -28,11 +30,21 @@ class UserType extends AbstractType
             ])
             //->add('roles')
             //added "PasswordType" class
-            ->add('password', PasswordType::class, [
-                "attr" => [
-                    "class" => "form-control"
+            ->add('password', RepeatedType::class, [
+                // 'type' => PasswordType::class,
+                // 'type' => ShowHidePasswordType::class,
+                "attr" => [ "class" => "form-control" ],
+                'invalid_message' => 'The password fields must match.',
+                'options' => ['attr' => ['class' => 'password-field form-control']],
+                'required' => true,
+                'first_options'  => [
+                    'label' => 'Mot de passe',
+                    "label_attr" => ["class" => "form-label"]
                 ],
-                "label" => "Mot de passe",
+                'second_options' => [
+                    'label' => 'Retapez le mot de passe',
+                    "label_attr" => ["class" => "form-label"]
+                ],
                 "label_attr" => ["class" => "form-label"]
             ])
         ;
