@@ -28,8 +28,9 @@ html, body {
     cursor: default;
 }
 
-h1, h2, h3, p, a, ul, li, th, td{
+h1, h2, h3, h4, h5, p, a, ul, li, th, td{
     color: var(--DarkRed);
+    text-transform: capitalize;
 }
 
 h1{
@@ -50,10 +51,10 @@ img{
     width: 100%;
     height: 100vh;
     margin: auto;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    /* flex-direction: column; */
+    /* justify-content: center; */
     /* background-image: url("https://picsum.photos/800/600/?blur=2"); */
     background-repeat: no-repeat;
     background-size: cover;
@@ -68,6 +69,7 @@ img{
     opacity: 0.8;
     border-radius: 0 !important;
     position: fixed;
+    top: 0;
     width: 100%;
 }
 
@@ -94,6 +96,10 @@ img{
 .home{
     background-image: url("https://picsum.photos/1920/1080");
     text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     /* transform: translate();
     transition: all .5s linear; */
 }
@@ -323,16 +329,84 @@ img{
     
 }
 
-.blockPage div{
-    display: flex;
-    flex-wrap: wrap;
+.shopAdminView{
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
 }
 
-/****************************** Shop Admin ***********************/
+.shopAdminView div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 
-.shopUserView img {
-    object-fit: fill;
-    /* width: 50px;
-    height: 50px; */
+/****************************** Shop User ***********************/
 
+.shopUserView {
+    max-width: 60rem;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
+
+.shopUserView section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: space-around;
+}
+
+.produit{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: space-around;
+    height: 11rem;
+    width: 11rem;
+    margin: 1rem;
+    text-align: center;
+}
+
+.produit img, .produit i {
+    object-fit: cover;
+    height: 10rem;
+    width: 10rem;
+}
+
+.produit i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produit .card-img-overlay{
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ffb9088f;
+    color: var(--RossoCorsa);
+    
+}
+
+.produit .card-img-overlay:hover {
+    opacity: 1;
+    backdrop-filter: blur(5px);
+}
+
+.produit .card-img-overlay h5,
+.produit .card-img-overlay p {
+    background-color: rgba(255, 255, 255, 0.453);
+    line-height: 12px;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+    border-radius: 5px;
+    padding: 10px 15px 8px;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
 }
