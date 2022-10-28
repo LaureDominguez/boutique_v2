@@ -15,8 +15,8 @@
             </div>
             
             <div class="groupe-button-option">
-                <button class="btn btn-lg">{{ button_label|default('Valider') }}</button>
-                <a class="btn btn-lg" href="{{ path('app_user_show', {'id': user.id}) }}" class="dropdown-item">Annuler</a>
+                <button class="btn btn-sm">{{ button_label|default('Valider') }}</button>
+                <a class="btn btn-sm" href="{{ path('app_user_show', {'id': user.id}) }}" class="dropdown-item">Annuler</a>
             </div>
         {{ form_end(form) }}
     </div>

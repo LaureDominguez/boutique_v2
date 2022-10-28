@@ -92,13 +92,14 @@ class UserController extends AbstractController
     
 // Bloqué, à fixer
     #[Route('/registred/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, UserRepository $userRepository, SecurityController $securityController): Response
+    public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $this->redirectToRoute('app_logout' . $securityController, ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+            $this->container->get('security.token_storage')->setToken(null);
             $userRepository->remove($user, true);
         }
 
+        $this->addFlash('deleted', 'Votre compte a bien été supprimé.');
         return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
