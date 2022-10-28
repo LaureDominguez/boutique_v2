@@ -24,17 +24,26 @@ class PasswordEditType extends AbstractType
                 'options' => ['attr' => [
                     'class' => 'password-field form-control',
                     'value'  => "",
+                'input' => 'required'
                     ]],
                 'required' => true,
                 'first_options'  => [
                     'label' => 'Nouveau mot de passe',
-                    "label_attr" => ["class" => "form-label"]
+                    "label_attr" => [
+                        'class' => 'password-field form-label',
+                        'value'  => "",
+                        'input' => 'required'
+                    ]
                 ],
                 'second_options' => [
                     'label' => 'Retapez le nouveau mot de passe',
-                    "label_attr" => ["class" => "form-label"]
+                    "label_attr" => [
+                        'class' => 'password-field form-label',
+                        'value'  => "",
+                    'input' => 'required'
+                    ]
                 ],
-                "label_attr" => ["class" => "form-label"]
+                "label_attr" => ["class" => "password-field form-control"]
             ])
         ;
     }

@@ -8,7 +8,15 @@
         <div class="block">
             <h1 class="h3 mb-3 font-weight-normal">Créez votre compte</h1>
 
-            {{ include('user/_form.html.twig') }}
+            {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+                
+                <div class="groupe-button-option">
+                    <button class="btn btn-sm">{{ button_label|default('Valider') }}</button>
+                </div>
+            {{ form_end(form) }}
+
         </div>
     </div>
 

@@ -79,6 +79,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // vérifier que le mot de passe est bon, puis...
+
             $userRepository->save($user, true);
 
             return $this->redirectToRoute('app_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
@@ -90,7 +93,6 @@ class UserController extends AbstractController
         ]);
     }
     
-// Bloqué, à fixer
     #[Route('/registred/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
