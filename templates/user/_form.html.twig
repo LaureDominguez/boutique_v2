@@ -1,7 +1,8 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     {# <input type="checkbox" onclick="showPass()"> Afficher le mot de passe<br> #}
-    <div class="groupe-button-option">
-        <button class="btn btn-lg">{{ button_label|default('Valider') }}</button>
-    </div>
+    {# <div class="groupe-button-option">
+        <button class="btn btn-sm">{{ button_label|default('Valider') }}</button>
+        <a class="btn btn-sm" href="{{ path('app_login') }}" class="dropdown-item">Annuler</a>
+    </div> #}
 {{ form_end(form) }}

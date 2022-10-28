@@ -5,14 +5,15 @@
 {% block body %}
 <div class="blockPage loginPage">
     <div class="user">
-        <h1>Modifier le compte</h1>
+        <h1>Modifier le mot de passe</h1>
 
         {{ form_start(form) }}
-            {{ form_widget(form) }}
             <div>
-                <label for="inputPassword">Mot de passe</label>
-                <input type="password" id="user_password" name="password" class="form-control" required>
+                <label for="inputPassword">Mot de passe actuel</label>
+                <input type="password" id="user_password" name="password" class="form-control" value="" required>
             </div>
+
+            {{ form_widget(form) }}
             
             <div class="groupe-button-option">
                 <button class="btn btn-sm">{{ button_label|default('Valider') }}</button>

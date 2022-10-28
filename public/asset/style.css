@@ -85,8 +85,8 @@ img{
     border-bottom: solid 1.2px transparent;
 }
 
-.navbar li:hover,
-.navbar li:active {
+.navbar li:hover:not(.divider),
+.navbar li:active:not(.divider) {
     color: var(--Persimmon);
     background-color: rgba(255, 255, 255, 0.144);
     border-top: solid 1.2px var(--Vermilion);
