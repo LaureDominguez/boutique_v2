@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,12 +18,13 @@ class CategoryType extends AbstractType
             "label" => "Nom",
             "label_attr" => ["class" => "form-label"]
         ])
-            ->add('img', null, [
-            "attr" => ["class" => "form-control"],
-            "label" => "Image",
+            ->add('color', ColorType::class, [
+            "attr" => [
+                "class" => "form-control form-control-color"
+            ],
+            "label" => "Couleur",
             "label_attr" => ["class" => "form-label"]
-        ])
-        ;
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

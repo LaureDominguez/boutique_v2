@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 //added "GalleryRepository" path
 use App\Repository\GalleryRepository;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -56,7 +56,7 @@ class ProductType extends AbstractType
             "label" => "Description",
             "label_attr" => ["class" => "form-label"]
         ])
-            ->add('price', null, [
+            ->add('price', MoneyType::class, [
             "attr" => ["class" => "form-control"],
             "label" => "Prix",
             "label_attr" => ["class" => "form-label"]

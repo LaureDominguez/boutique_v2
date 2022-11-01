@@ -24,7 +24,7 @@
                     <tr>
                         <th>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
-                        <td>{{ product.category.name }}</td>
+                        <td class="cat" >{{ product.category.name }}</td>
                         <td>{{ product.description }}</td>
                         <td>
                             {% for picture in product.gallery %}

@@ -22,7 +22,7 @@ class Category
     private Collection $other;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $img = null;
+    private ?string $color = null;
 
     public function __construct()
     {
@@ -76,14 +76,14 @@ class Category
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getColor(): ?string
     {
-        return $this->img;
+        return $this->color;
     }
 
-    public function setImg(?string $img): self
+    public function setColor(?string $color): self
     {
-        $this->img = $img;
+        $this->color = $color;
 
         return $this;
     }

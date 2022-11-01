@@ -13,6 +13,7 @@
     --OrangeWeb: #FAA307;
     --SelectiveYellow: #FFBA08;
     --Shadow: 0 0 10px #3a3a3a88;
+    --Category: {{product.category.color}};
 }
 
 *{
@@ -64,6 +65,10 @@ img{
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+}
+
+.cat{
+    color: var(--Category) !important;
 }
 
 /************************* Nav **********************/
@@ -344,6 +349,13 @@ img{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.shopAdmin {
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
 }
 
 /****************************** Shop User ***********************/

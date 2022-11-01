@@ -36,13 +36,29 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->save($product, true);
+
             $images = $form->get('gallery')->getData();
 
-            $fichier = md5(uniqid()) . '-' . uniqid() . '.' . $images->guessExtension();
-            $images->move(
-                $this->getParameter('kernel.project_dir') . ('/public/uploads/images_directory'),
-                $fichier
-            );
+                if ($images->isEmpty()) {
+                    $productRepository->save($product, true);
+                    return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+                }
+                
+                else {
+                    $fichier = md5(uniqid()) . '-' . uniqid() . '.' . $images->guessExtension();
+                    $images->move(
+                        $this->getParameter('kernel.project_dir') . ('/public/uploads/images_directory'),
+                        $fichier
+                    );
+                    $img = new Gallery();
+                    $img->setPicture($fichier);
+                    $galleryRepository->save($img, true);
+                    $product->addGallery($img);
+                    $productRepository->save($product, true);
+                    return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+                }
+
+            ;
 
             // On boucle sur les images
             // foreach ($images as $image) {
@@ -56,14 +72,8 @@ class ProductController extends AbstractController
             //     );
 
             // On crée l'image dans la base de données
-            $img = new Gallery();
-            $img->setPicture($fichier);
-            $galleryRepository->save($img, true);
-            $product->addGallery($img);
+            
             // }
-
-            $productRepository->save($product, true);
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/new.html.twig', [

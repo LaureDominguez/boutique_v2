@@ -21,7 +21,7 @@
                             {% for category in categories %}
                                 <tr>
                                     <th scope="row"><a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.id }}</a></th>
-                                    <td><a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a></td>
+                                    <td class="cat" ><a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a></td>
                                     <td class="groupe-button-pic">
                                         <a class="btn btn-sm" href="{{ path('app_category_edit', {'id': category.id}) }}"><i class="fa-solid fa-pen-to-square" title="modifier"></i></a>
                                         <form method="post" action="{{ path('app_category_delete', {'id': category.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ? Attention, cela supprimera tous les articles liés.');">

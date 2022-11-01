@@ -4,9 +4,11 @@
 
 {% block body %}
     <div class="blockPage">
-        <h1>Modifier le produit</h1>
-        <div class="block-category">
-            {{ include('product/_form.html.twig', {'button_label': 'Modifier'}) }}
-        </div>
+        <section class="shopAdmin">
+            <h1>Modifier le produit</h1>
+            <div class="block-category">
+                {{ include('product/_form.html.twig', {'button_label': 'Modifier'}) }}
+            </div>
+        <section>
     </div>
 {% endblock %}
