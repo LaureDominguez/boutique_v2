@@ -58,7 +58,11 @@
                 <h1>{{ product.name }}</h1>
                 <p>{{ product.description }}</p>
                 <p>{{ product.price }}</p>
-                {{ include('cart/new.html.twig') }}
+                    <form method="post" action="{{ path('app_cart_new', {'id': product.id}) }}">
+                        <input type="number">
+                        <button class="btn">Ajouter</button>
+                    </form>
+                {# {{ include('cart/new.html.twig') }} #}
                 {% for picture in product.gallery %}
                     <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}">
                 {% endfor %}

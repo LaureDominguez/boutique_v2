@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Form\CartType;
 use App\Repository\CartRepository;
+use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,27 +23,33 @@ class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_cart_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CartRepository $cartRepository): Response
+    #[Route('/new/{id}', name: 'app_cart_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, CartRepository $cartRepository, Product $product): Response
     {
         $cart = new Cart();
-        $form = $this->createForm(CartType::class, $cart);
-        $form->handleRequest($request);
+        // $form = $this->createForm(CartType::class, $cart);
+        // $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        // if ($form->isSubmitted() && $form->isValid()) {
+
+            $cart->setQuantity(1);
+            $cart->setUser($this->getUser());
+            $cart->setProduct($product);
+
             $cartRepository->save($cart, true);
 
             // change targetPath
-            $targetPath = $this->getTargetPath;
-            return new RedirectResponse($targetPath);
+            // $targetPath = $this->getTargetPath();
+            // return new RedirectResponse($targetPath);
 
-            // return $this->redirectToRoute('app_cart_index', [], Response::HTTP_SEE_OTHER);
-        }
+            return $this->redirectToRoute('app_product_show', ["id"=>$product->getId()]);
+        // }
 
-        return $this->renderForm('cart/new.html.twig', [
-            'cart' => $cart,
-            'form' => $form,
-        ]);
+        // return $this->renderForm('cart/new.html.twig', [
+        //     'cart' => $cart,
+        //     'form' => $form,
+        //])
+        ;
     }
 
 

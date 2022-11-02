@@ -376,6 +376,12 @@ img{
     align-content: space-around;
 }
 
+.card-text:first-of-type {
+    max-width: 10rem;
+    max-height: 10rem;
+    overflow: hidden;
+}
+
 .produit{
     display: flex;
     flex-wrap: wrap;
