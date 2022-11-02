@@ -39,7 +39,11 @@ class ProductController extends AbstractController
 
             $images = $form->get('gallery')->getData();
 
-                if ($images->isEmpty()) {
+                if ($images->isNull()) {
+                    $img = new Gallery();
+                    $img->setPicture('<i class="fa-regular fa-image"></i>');
+                    $galleryRepository->save($img, true);
+                    $product->addGallery($img);
                     $productRepository->save($product, true);
                     return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
                 }
