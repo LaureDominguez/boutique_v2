@@ -13,6 +13,7 @@
                 {{ form_widget(form) }}
                 
                 <div class="groupe-button-option">
+                    <a class="btn btn-sm" href="{{ path('app_login') }}" class="dropdown-item">Annuler</a>
                     <button class="btn btn-sm">{{ button_label|default('Valider') }}</button>
                 </div>
             {{ form_end(form) }}

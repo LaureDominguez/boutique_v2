@@ -80,6 +80,7 @@ img{
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 10;
 }
 
 .navbar li{
@@ -184,7 +185,7 @@ img{
     color: var(--Persimmon);
     background-color: #fff;
     padding: 1rem;
-    border-radius: 2%;
+    border-radius: 10px;
     text-align: left;
     box-shadow: var(--Shadow);
 }
@@ -239,7 +240,7 @@ img{
     color: var(--Persimmon);
     background-color: #fff;
     padding: 1rem;
-    border-radius: 2%;
+    border-radius: 10px;
     text-align: center;
     box-shadow: var(--Shadow);
 }
@@ -267,7 +268,7 @@ img{
     color: var(--Persimmon);
     background-color: #fff;
     padding: 1rem;
-    border-radius: 2%;
+    border-radius: 10px;
     text-align: left;
     box-shadow: var(--Shadow);
 }
@@ -325,7 +326,7 @@ img{
 .block-category {
     margin: 1rem;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 10px;
     border-style: solid;
     border-color: rgb(200, 200, 200);
     background-color: rgb(225, 225, 225);
@@ -428,7 +429,36 @@ img{
     line-height: 12px;
     letter-spacing: 1px;
     margin: 0 0 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px 15px 8px;
     box-shadow: 0 0 10px rgb(255, 255, 255);
 }
+
+/****************************** Cart ***********************/
+
+.cart{
+    width: 30rem;
+    height: 5rem;
+    border-radius: 50px;
+    position: fixed;
+    top: 5rem;
+    left: -26rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: var(--OrangeWeb);
+    display: none;
+}
+
+.cart:hover {
+    left: -20rem;
+}
+
+.cart p{
+    margin: 0;
+}
+
+.cart i, cart p{
+    padding: 2rem;
+}
+

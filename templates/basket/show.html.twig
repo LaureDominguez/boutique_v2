@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <div class="blockPage">
+        <div class="shopUserView">
+            <h1>Panier</h1>
+            {# {{dump(cart)}} #}
+            {% for product in cart %}
+                <p>{{ product.id }}</p>
+                {% for basket in product %}
+                    <p>{{ basket.name }}</p>
+                    {% else %}
+                    <p colspan="5">no records found</p>
+                {% endfor %}
+            {% else %}
+                    <p colspan="5">no records found</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

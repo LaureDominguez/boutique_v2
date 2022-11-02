@@ -59,7 +59,7 @@
                 <p>{{ product.description }}</p>
                 <p>{{ product.price }}</p>
                     <form method="post" action="{{ path('app_cart_new', {'id': product.id}) }}">
-                        <input type="number">
+                        <input class="form-control" type="number">
                         <button class="btn">Ajouter</button>
                     </form>
                 {# {{ include('cart/new.html.twig') }} #}
