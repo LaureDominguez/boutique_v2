@@ -59,7 +59,7 @@ class ProductController extends AbstractController
 
             $images = $form->get('gallery')->getData();
 
-                if ($images->isNull()) {
+                if ($images == null) {
                     $img = new Gallery();
                     $img->setPicture('<i class="fa-regular fa-image"></i>');
                     $galleryRepository->save($img, true);
@@ -80,24 +80,7 @@ class ProductController extends AbstractController
                     $product->addGallery($img);
                     $productRepository->save($product, true);
                     return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
-                }
-
-            ;
-
-            // On boucle sur les images
-            // foreach ($images as $image) {
-            //     // On génère un nouveau nom de fichier
-            //     $fichier = md5(uniqid()) . '.' . $image->guessExtension();
-
-            //     // On copie le fichier dans le dossier uploads
-            //     $image->move(
-            //         $this->getParameter('./public/uploads/images_directory'),
-            //         $fichier
-            //     );
-
-            // On crée l'image dans la base de données
-            
-            // }
+                };
         }
 
         return $this->renderForm('product/new.html.twig', [
@@ -129,41 +112,34 @@ class ProductController extends AbstractController
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
-        // if ($form->getClickedButton() && 'saveAndAdd' === $form->getClickedButton()->getName()) {
-        //     // ...
-        // }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $productRepository->save($product, true);
+
             $images = $form->get('gallery')->getData();
 
-            $fichier = md5(uniqid()) . '-' . uniqid() . '.' . $images->guessExtension();
-            $images->move(
-                $this-> getParameter('kernel.project_dir') . ('/public/uploads/images_directory'),
-                $fichier
-            );
-
-            // On boucle sur les images
-            // foreach ($images as $image) {
-            //     // On génère un nouveau nom de fichier
-            //     $fichier = md5(uniqid()) . '.' . $image->guessExtension();
-
-            //     // On copie le fichier dans le dossier uploads
-            //     $image->move(
-            //         $this->getParameter('./public/uploads/images_directory'),
-            //         $fichier
-            //     );
-
-                // On crée l'image dans la base de données
+            if ($images == null) {
+                $img = new Gallery();
+                $img->setPicture('<i class="fa-regular fa-image"></i>');
+                $galleryRepository->save($img, true);
+                $product->addGallery($img);
+                $productRepository->save($product, true);
+                return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                $fichier = md5(uniqid()) . '-' . uniqid() . '.' . $images->guessExtension();
+                $images->move(
+                    $this->getParameter('kernel.project_dir') . ('/public/uploads/images_directory'),
+                    $fichier
+                );
                 $img = new Gallery();
                 $img->setPicture($fichier);
                 $galleryRepository->save($img, true);
                 $product->addGallery($img);
-            // }
-
-            $productRepository->save($product, true);
-
-            return $this->redirectToRoute('app_product_index', ['display_cart' => false,], Response::HTTP_SEE_OTHER);
+                $productRepository->save($product, true);
+                return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            };
         }
+
 
         return $this->renderForm('product/edit.html.twig', [
             'product' => $product,

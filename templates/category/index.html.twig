@@ -10,7 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Img</th>
+                <th>color</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,7 +18,7 @@
         {% for category in categories %}
             <tr>
                 <td>{{ category.id }}</td>
-                *<td>{{ category.img }}</td>
+                *<td>{{ category.color }}</td>
                 <td>{{ category.name }}</td>
                 <td>
                     <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
