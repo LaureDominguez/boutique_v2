@@ -40,9 +40,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/shop_user', name: 'app_shop_user')]
-    public function shop_user(ProductRepository $productRepository): Response
+    public function shop_user(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
         return $this->render('shop_user/index.html.twig', [
+            'categories' => $categoryRepository->findAll(),
             'products' => $productRepository->findAll(),
             'display_cart' => $this->checkCart(),
         ]);

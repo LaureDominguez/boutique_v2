@@ -369,7 +369,7 @@ img{
     padding: 1rem;
 }
 
-.shopUserView section{
+.shopUserView .products{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
