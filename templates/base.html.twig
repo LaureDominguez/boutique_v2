@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Pâtes fraîches de Savoie{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -13,8 +13,9 @@
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
             {# CSS #}
-            <link href="{{asset('./asset/style.css')}}" rel="stylesheet">	
+            <link href="{{asset('./asset/style.css')}}" rel="stylesheet">
             {{ encore_entry_link_tags('app') }}
+            
         {% endblock %}
 
         {% block javascripts %}
@@ -46,14 +47,13 @@
                     </ul>
                 {% endif %}
                 
-                
                 {% if app.user %}
                     <ul class="nav dropdown-menu-end">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="dropdown-item text-center">Profil</a></li>
-                                    <li><a href="{{ path('app_basket') }}" class="dropdown-item text-center">Panier</a></li>
+                                    <li><a href="{{ path('app_basket', {'id': app.user.id}) }}" class="dropdown-item text-center">Panier</a></li>
                                     <li class="divider"><hr class="dropdown-divider"></li>
                                     <li><a href="{{ path('app_logout') }}" class="dropdown-item text-center">Déconnexion</a></li>
                             </ul>
@@ -63,11 +63,9 @@
             </nav>
         </header>
         <main>
-            {% block body %}{% endblock %}
-            <aside class="cart" id="cart">
-                <p>Total €</p>
-                <i class="fa-solid fa-cart-shopping"></i>
-            </aside>
+            {{ include('basket/display_cart.html.twig') }} 
+            {% block body %}
+            {% endblock %}
         </main>
     </body>
 </html>

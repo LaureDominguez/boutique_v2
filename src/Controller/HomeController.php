@@ -9,15 +9,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
-// use App\Entity\Cart;
+use PhpParser\Builder\Property;
 
 class HomeController extends AbstractController
 {
+    private ?CartRepository $cartRepository;
+
+    public function __construct(CartRepository $cartRepository)
+    {
+        $this->cartRepository = $cartRepository;
+    }
+
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
+        $this->checkCart();
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -26,7 +34,8 @@ class HomeController extends AbstractController
     {
         return $this->render('shop_admin/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
-            'products' => $productRepository->findAll()
+            'products' => $productRepository->findAll(),
+            'display_cart' => false,
         ]);
     }
 
@@ -34,7 +43,8 @@ class HomeController extends AbstractController
     public function shop_user(ProductRepository $productRepository): Response
     {
         return $this->render('shop_user/index.html.twig', [
-            'products' => $productRepository->findAll()
+            'products' => $productRepository->findAll(),
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -42,9 +52,22 @@ class HomeController extends AbstractController
     public function show(CartRepository $cartRepository, ProductRepository $productRepository): Response
     {
         return $this->render('basket/show.html.twig', [
-            'cart' => $cartRepository->findBy(['user'=>$this->getUser()]),
+            'cart' => $cartRepository->findBy(['user' => $this->getUser()]),
+            'display_cart' => $this->checkCart(),
             // 'products' => $productRepository->findBy(['id']),
             // 'basket' => $cartRepository->findBy(['product'])
         ]);
+    }
+
+    private function checkCart()
+    {
+        $user = $this->getUser();
+        if ($user !== null){
+            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
+            if (!empty($checkCart)){
+                return true;
+            }
+        }
+        return false;
     }
 }

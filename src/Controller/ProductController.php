@@ -6,6 +6,7 @@ use App\Entity\Gallery;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,24 @@ use App\Repository\GalleryRepository;
 #[Route('/product')]
 class ProductController extends AbstractController
 {
+    private ?CartRepository $cartRepository;
+
+    public function __construct(CartRepository $cartRepository)
+    {
+        $this->cartRepository = $cartRepository;
+    }
+
+    private function checkCart()
+    {
+        $user = $this->getUser();
+        if ($user !== null) {
+            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
+            if (!empty($checkCart)) {
+                return true;
+            }
+        }
+        return false;
+    }
 ///////// Index /////////////////
 
     #[Route('/', name: 'app_product_index', methods: ['GET'])]
@@ -22,6 +41,7 @@ class ProductController extends AbstractController
     {
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -83,6 +103,7 @@ class ProductController extends AbstractController
         return $this->renderForm('product/new.html.twig', [
             'product' => $product,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
 
@@ -93,10 +114,10 @@ class ProductController extends AbstractController
     {
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            
             'gallery' => $galleryRepository->findBy([
                 "product" => $product,
             ]),
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -141,12 +162,13 @@ class ProductController extends AbstractController
 
             $productRepository->save($product, true);
 
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_product_index', ['display_cart' => false,], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
 
@@ -159,6 +181,6 @@ class ProductController extends AbstractController
             $productRepository->remove($product, true);
         }
 
-        return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_product_index', ['display_cart' => false,], Response::HTTP_SEE_OTHER);
     }
 }

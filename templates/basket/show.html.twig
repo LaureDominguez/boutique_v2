@@ -6,14 +6,12 @@
     <div class="blockPage">
         <div class="shopUserView">
             <h1>Panier</h1>
-            {# {{dump(cart)}} #}
             {% for product in cart %}
-                <p>{{ product.id }}</p>
-                {% for basket in product %}
-                    <p>{{ basket.name }}</p>
-                    {% else %}
-                    <p colspan="5">no records found</p>
-                {% endfor %}
+            
+                <p>{{ product.product.name }}</p>
+                <p>{{ product.product.price }}</p>
+                <p>{{ product.quantity }}</p>
+                
             {% else %}
                     <p colspan="5">no records found</p>
             {% endfor %}

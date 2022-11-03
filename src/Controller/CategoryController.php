@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CartRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +15,31 @@ use App\Repository\ProductRepository;
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
+    private ?CartRepository $cartRepository;
+
+    public function __construct(CartRepository $cartRepository)
+    {
+        $this->cartRepository = $cartRepository;
+    }
+
+    private function checkCart()
+    {
+        $user = $this->getUser();
+        if ($user !== null) {
+            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
+            if (!empty($checkCart)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('category/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -38,6 +59,7 @@ class CategoryController extends AbstractController
         return $this->renderForm('category/new.html.twig', [
             'category' => $category,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
 
@@ -49,6 +71,7 @@ class CategoryController extends AbstractController
             'products' => $productRepository->findBy([
                 "category"=> $category
             ]),
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -67,6 +90,7 @@ class CategoryController extends AbstractController
         return $this->renderForm('category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
 
@@ -77,6 +101,6 @@ class CategoryController extends AbstractController
             $categoryRepository->remove($category, true);
         }
 
-        return $this->redirectToRoute('app_shop_admin', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_shop_admin', ['display_cart' => false,], Response::HTTP_SEE_OTHER);
     }
 }

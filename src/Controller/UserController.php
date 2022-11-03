@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Form\UserEditType;
 use App\Form\PasswordEditType;
 use App\Repository\UserRepository;
+use App\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +19,31 @@ use App\Controller\SecurityController;
 
 class UserController extends AbstractController
 {
+    private ?CartRepository $cartRepository;
+
+    public function __construct(CartRepository $cartRepository)
+    {
+        $this->cartRepository = $cartRepository;
+    }
+
+    private function checkCart()
+    {
+        $user = $this->getUser();
+        if ($user !== null) {
+            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
+            if (!empty($checkCart)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     #[Route('/user/list', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'display_cart' => false,
         ]);
     }
 
@@ -43,6 +64,7 @@ class UserController extends AbstractController
         return $this->renderForm('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
 
@@ -51,6 +73,7 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'display_cart' => $this->checkCart(),
         ]);
     }
 
@@ -69,6 +92,7 @@ class UserController extends AbstractController
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
 
@@ -90,6 +114,7 @@ class UserController extends AbstractController
         return $this->renderForm('user/edit-pass.html.twig', [
             'user' => $user,
             'form' => $form,
+            'display_cart' => false,
         ]);
     }
     
@@ -102,6 +127,6 @@ class UserController extends AbstractController
         }
 
         $this->addFlash('deleted', 'Votre compte a bien été supprimé.');
-        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_home', ['display_cart' => false,], Response::HTTP_SEE_OTHER);
     }
 }
