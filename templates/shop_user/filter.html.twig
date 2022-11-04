@@ -10,7 +10,8 @@
                 <label>Filtre</label>
                 <input type="hidden" value="{{path('app_shop_user')}}" id="urlAddress">
                 <select name="checkCategory" id="checkCategory">
-                <option value=" ">---</option>
+                        {# onchange="window.location.href='{{path('app_shop_user')}}/' + this.value " #}
+                    <option value=" ">---</option>
                     {% for category in categories %}
                         <option value="{{ category.id }}" select="">{{ category.name }}</option>
                     {% endfor %}
@@ -18,7 +19,6 @@
             </form>
 
             <section class="categories">
-            {% for category in categories %}
                 <h2>{{ category.name }}<h2>
                 <section class="products">
                     {% for product in products %}
@@ -42,7 +42,7 @@
                         <p>aucun objet trouvé</p>
                     {% endfor %}
                     </section>
-                {% endfor %}
+                {# {% endfor %} #}
             </section>
         </div>
     </div>

@@ -65,7 +65,7 @@ class ProductType extends AbstractType
             ->add('gallery', FileType::class, [
             "attr" => ["class" => "form-control"],
             'label' => "Photo",
-            //'multiple' => true,
+            // 'multiple' => true,
             'mapped' => false,
             'required' => false,
             'constraints' => [

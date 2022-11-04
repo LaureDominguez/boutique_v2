@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Repository\CartRepository;
+use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,11 +41,23 @@ class HomeController extends AbstractController
     }
 
     #[Route('/shop_user', name: 'app_shop_user')]
-    public function shop_user(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
+    public function shop_user(  CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
         return $this->render('shop_user/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
             'products' => $productRepository->findAll(),
+            'display_cart' => $this->checkCart(),
+        ]);
+    }
+
+    #[Route('/shop_user/{id}', name: 'app_shop_filtre')]
+    public function shop_filter(Category $category, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
+    {
+        $products = $productRepository->findBy(['category'=>$category]);
+        return $this->render('shop_user/filter.html.twig', [
+            'category' => $category,
+            'categories' => $categoryRepository->findAll(),
+            'products' => $products,
             'display_cart' => $this->checkCart(),
         ]);
     }
