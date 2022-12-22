@@ -11,11 +11,9 @@ use App\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\Routing\Annotation\Route;
 //added "UserPasswordHasherInterface" path
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Controller\SecurityController;
 
 class UserController extends AbstractController
 {
@@ -58,10 +56,30 @@ class UserController extends AbstractController
             $user->setPassword($passHasher->hashPassword($user, $user->getPassword()));
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->renderForm('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form,
+            'display_cart' => false,
+        ]);
+    }
+
+    #[Route('/registred/{id}/editPass', name: 'app_password_edit', methods: ['GET', 'POST'])]
+    public function passEdit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $passHasher): Response
+    {
+        $form = $this->createForm(PasswordEditType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($passHasher->hashPassword($user, $user->getPassword()));
+            $userRepository->save($user, true);
+
+            return $this->redirectToRoute('app_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/edit-pass.html.twig', [
             'user' => $user,
             'form' => $form,
             'display_cart' => false,
@@ -90,28 +108,6 @@ class UserController extends AbstractController
         }
 
         return $this->renderForm('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-            'display_cart' => false,
-        ]);
-    }
-
-    #[Route('/registred/{id}/editPass', name: 'app_password_edit', methods: ['GET', 'POST'])]
-    public function passEdit(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        $form = $this->createForm(PasswordEditType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // vérifier que le mot de passe est bon, puis...
-
-            $userRepository->save($user, true);
-
-            return $this->redirectToRoute('app_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/edit-pass.html.twig', [
             'user' => $user,
             'form' => $form,
             'display_cart' => false,

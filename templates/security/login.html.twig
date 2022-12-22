@@ -18,24 +18,13 @@
                 <div>
                     <label for="inputPassword">Mot de passe</label>
                     {% block show_hide_password %}
-                    <input type="password" id="user_password" name="password" class="form-control" required>
+                        <input type="password" id="user_password" name="password" class="form-control" required>
                     {% endblock show_hide_password %}
                     {# <input type="checkbox" onclick="showPass()"> Afficher le mot de passe<br> #}
                 </div>
 
-                <input type="hidden" name="_csrf_token"
-                    value="{{ csrf_token('authenticate') }}"
-                >
-
-                
-                    {# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                    See https://symfony.com/doc/current/security/remember_me.html #}
-
-                {# <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                    </label>
-                </div> #}
+                <input  type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}">
 
                 <button class="btn btn-sm" type="submit">Connexion</button>
             </form>
