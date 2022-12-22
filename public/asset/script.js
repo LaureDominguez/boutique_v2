@@ -5,5 +5,4 @@ selectCategory.addEventListener("change", (event) => {
     console.log(event.target.value)
     window.location.href = selectUrl + "/" + event.target.value
     
-    // window.location.select = "selected"
 })

@@ -64,7 +64,9 @@
             </nav>
         </header>
         <main>
-            {{ include('basket/display_cart.html.twig') }} 
+            {% if not is_granted("ROLE_ADMIN") %}
+                {{ include('basket/display_cart.html.twig') }} 
+            {% endif %}    
             {% block body %}
             {% endblock %}
         </main>

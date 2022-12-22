@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{# voir si cette page est utile #}
+
 {% block title %}Boutique{% endblock %}
 
 {% block body %}
     <div class="blockPage">
         <div class="shopUserView">
             <h1>Achetez des pates !</h1>
+
             <form>
                 <label>Filtre</label>
                 <input type="hidden" value="{{path('app_shop_user')}}" id="urlAddress">

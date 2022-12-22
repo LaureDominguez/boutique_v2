@@ -6,20 +6,19 @@
     <div class="blockPage">
         <div class="shopUserView">
             <h1>Achetez des pates !</h1>
-            <form>
-                <label>Filtre</label>
-                <input type="hidden" value="{{path('app_shop_user')}}" id="urlAddress">
-                <select name="checkCategory" id="checkCategory">
-                <option value=" ">---</option>
+
+{# ajouter un fitre pour masquer les catégories non selectionnées #}
+            <nav>
+                <ul>
                     {% for category in categories %}
-                        <option value="{{ category.id }}" select="">{{ category.name }}</option>
+                        <li> <a href="#{{ category.id }}"> {{ category.name }}</a></li>
                     {% endfor %}
-                </select>
-            </form>
+                </ul>
+            </nav>
 
             <section class="categories">
             {% for category in categories %}
-                <h2>{{ category.name }}<h2>
+                <h2  id="{{ category.id }}" >{{ category.name }}<h2>
                 <section class="products">
                     {% for product in products %}
                         <article class="card produit">
