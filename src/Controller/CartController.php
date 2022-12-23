@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 #[Route('/registred/cart')]
 class CartController extends AbstractController
 {
+
     private ?CartRepository $cartRepository;
 
     public function __construct(CartRepository $cartRepository)
@@ -24,7 +25,7 @@ class CartController extends AbstractController
         $this->cartRepository = $cartRepository;
     }
 
-    private function checkCart()
+    public function checkCart()
     {
         $user = $this->getUser();
         if ($user !== null) {

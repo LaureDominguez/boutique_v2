@@ -24,7 +24,7 @@ class UserType extends AbstractType
                 'label' => 'Email',
                 'label_attr' => ['class' => 'form-label']
             ])
-            ->add('password', ShowHidePasswordType::class, )
+            // ->add('password', ShowHidePasswordType::class, )
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 "attr" => [ "class" => "form-control" ],
@@ -44,9 +44,9 @@ class UserType extends AbstractType
         ;
     }
     
-    public function getParent(){
-        return PasswordType::class;
-    }
+    // public function getParent(){
+    //     return PasswordType::class;
+    // }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

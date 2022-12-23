@@ -53,7 +53,7 @@ class ContactType extends AbstractType
             ->add('subject', null, [
                 'attr' => [
                     'class'     => 'form-control',
-                    'minlenght' => '4',
+                    'minlenght' => '2',
                     'maxlenght' => '150'
                 ],
                 'label' => 'Sujet',

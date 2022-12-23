@@ -5,7 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\CartRepository;
 use App\Form\ContactType;
 use App\Entity\Contact;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,25 +12,18 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
+use function PHPUnit\Framework\returnSelf;
+
 class ContactController extends AbstractController
 {
-    private ?CartRepository $cartRepository;
-
-    public function __construct(CartRepository $cartRepository)
+    public CartController $cartController;
+    public function __construct(CartController $cartController)
     {
-        $this->cartRepository = $cartRepository;
+        $this->cartController = $cartController;
     }
-
-    private function checkCart()
+    public function checkCart()
     {
-        $user = $this->getUser();
-        if ($user !== null) {
-            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
-            if (!empty($checkCart)) {
-                return true;
-            }
-        }
-        return false;
+        $this->checkCart = $this->cartController->checkCart();
     }
 
     #[Route('/contact', name: 'app_contact')]

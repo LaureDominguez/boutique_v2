@@ -34,7 +34,7 @@ class Contact
 
     #[ORM\Column(length: 150)]
     #[Constraints\NotBlank()]
-    #[Constraints\Length(min: 5, max: 150)]
+    #[Constraints\Length(min: 2, max: 150)]
     private ?string $subject = null;
 
     #[ORM\Column(type: Types::TEXT)]

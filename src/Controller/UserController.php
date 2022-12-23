@@ -7,7 +7,6 @@ use App\Form\UserType;
 use App\Form\UserEditType;
 use App\Form\PasswordEditType;
 use App\Repository\UserRepository;
-use App\Repository\CartRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,33 +16,25 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    private ?CartRepository $cartRepository;
-
-    public function __construct(CartRepository $cartRepository)
+    
+    public CartController $cartController;
+    public function __construct(CartController $cartController)
     {
-        $this->cartRepository = $cartRepository;
+        $this->cartController = $cartController;
+    }
+    public function checkCart()
+    {
+        $this->checkCart = $this->cartController->checkCart();
     }
 
-    private function checkCart()
-    {
-        $user = $this->getUser();
-        if ($user !== null) {
-            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
-            if (!empty($checkCart)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    #[Route('/user/list', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-            'display_cart' => false,
-        ]);
-    }
+    // #[Route('/user/list', name: 'app_user_index', methods: ['GET'])]
+    // public function index(UserRepository $userRepository): Response
+    // {
+    //     return $this->render('user/index.html.twig', [
+    //         'users' => $userRepository->findAll(),
+    //         'display_cart' => false,
+    //     ]);
+    // }
 
     #[Route('/register', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passHasher): Response
