@@ -70,11 +70,11 @@ class ContactType extends AbstractType
                     'class' => 'form-label mb-2'
                 ]
             ])
-            ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(['message' => '{{ errorCodes }}']),
-                'action_name' => 'contact',
-                'locale' => 'fr',
-            ])
+            // ->add('captcha', Recaptcha3Type::class, [
+            //     'constraints' => new Recaptcha3(['message' => '{{ errorCodes }}']),
+            //     'action_name' => 'contact',
+            //     'locale' => 'fr',
+            // ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-sm mt-2',
