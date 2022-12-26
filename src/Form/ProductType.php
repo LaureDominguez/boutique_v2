@@ -40,47 +40,47 @@ class ProductType extends AbstractType
 
         $builder
             ->add('category', ChoiceType::class, [
-            "choices"       => $categories,
-            "choice_value"  => "id",
-            "choice_label"  => "name",
-            "attr" => ["class" => "form-select"],
-            "label" => "Catégorie"
-        ])
+                "choices"       => $categories,
+                "choice_value"  => "id",
+                "choice_label"  => "name",
+                "attr" => ["class" => "form-select"],
+                "label" => "Catégorie"
+            ])
             ->add('name', null, [
-            "attr" => ["class" => "form-control"],
-            "label" => "Nom",
-            "label_attr" => ["class" => "form-label"]
-        ])
+                "attr" => ["class" => "form-control"],
+                "label" => "Nom",
+                "label_attr" => ["class" => "form-label"]
+            ])
             ->add('description', null, [
-            "attr" => ["class" => "form-control"],
-            "label" => "Description",
-            "label_attr" => ["class" => "form-label"]
-        ])
+                "attr" => ["class" => "form-control"],
+                "label" => "Description",
+                "label_attr" => ["class" => "form-label"]
+            ])
             ->add('price', MoneyType::class, [
-            "attr" => ["class" => "form-control"],
-            "label" => "Prix",
-            "label_attr" => ["class" => "form-label"]
-        ])
+                "attr" => ["class" => "form-control"],
+                "label" => "Prix",
+                "label_attr" => ["class" => "form-label"]
+            ])
             //->add("gallery")
             ->add('gallery', FileType::class, [
-            "attr" => ["class" => "form-control"],
-            'label' => "Photo",
-            // 'multiple' => true,
-            'mapped' => false,
-            'required' => false,
-            'constraints' => [
-                new Image([
-                    'maxSize' => '1024k',
-                    'mimeTypes' => [
-                        'image/jpeg',
-                        'image/png',
-                        'image/tiff'
-                    ],
-                    'mimeTypesMessage' => "Merci d'utiliser un format valide (jpeg, png, tiff)",
-                ])
-            ]
-        ])
-        // ->add('saveAndAdd', SubmitType::class, ['label' => 'Ajouter'])
+                "attr" => ["class" => "form-control"],
+                'label' => "Photo",
+                // 'multiple' => true,
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/tiff'
+                        ],
+                        'mimeTypesMessage' => "Merci d'utiliser un format valide (jpeg, png, tiff)",
+                    ])
+                ]
+            ])
+            // ->add('saveAndAdd', SubmitType::class, ['label' => 'Ajouter'])
         ;
     }
 

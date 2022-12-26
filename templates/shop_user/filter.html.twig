@@ -2,51 +2,53 @@
 
 {# voir si cette page est utile #}
 
-{% block title %}Boutique{% endblock %}
+{% block title %}Boutique
+{% endblock %}
 
 {% block body %}
-    <div class="blockPage">
-        <div class="shopUserView">
-            <h1>Achetez des pates !</h1>
+	<div class="blockPage">
+		<div class="shopUserView">
+			<h1>Achetez des pates !</h1>
 
-            <form>
-                <label>Filtre</label>
-                <input type="hidden" value="{{path('app_shop_user')}}" id="urlAddress">
-                <select name="checkCategory" id="checkCategory">
-                        {# onchange="window.location.href='{{path('app_shop_user')}}/' + this.value " #}
-                    <option value=" ">---</option>
-                    {% for category in categories %}
-                        <option value="{{ category.id }}" select="">{{ category.name }}</option>
-                    {% endfor %}
-                </select>
-            </form>
+			<form>
+				<label>Filtre</label>
+				<input type="hidden" value="{{path('app_shop_user')}}" id="urlAddress">
+				<select
+					name="checkCategory" id="checkCategory">
+					{# onchange="window.location.href='{{path('app_shop_user')}}/' + this.value " #}
+					<option value=" ">---</option>
+					{% for category in categories %}
+						<option value="{{ category.id }}" select="">{{ category.name }}</option>
+					{% endfor %}
+				</select>
+			</form>
 
-            <section class="categories">
-                <h2>{{ category.name }}<h2>
-                <section class="products">
-                    {% for product in products %}
-                        <article class="card produit">
-                            <a href="{{ path('app_product_show', {'id': product.id}) }}">
-                                {% for picture in product.gallery %}
-                                    {% if picture == product.gallery.first %}
-                                        <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
-                                    {% endif %}
-                                    {% else %}
-                                        <i class="fa-solid fa-camera"></i>
-                                {% endfor %}
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title">{{ product.name }}</h5>
-                                    <p class="card-text">{{ product.description }}</p>
-                                    <p class="card-text">{{ product.price }}€</p>
-                                </div>
-                            </a>
-                        </article>
-                    {% else %}
-                        <p>aucun objet trouvé</p>
-                    {% endfor %}
-                    </section>
-                {# {% endfor %} #}
-            </section>
-        </div>
-    </div>
-{% endblock %}
+			<section class="categories">
+				<h2>{{ category.name }}<h2>
+						<section class="products">
+							{% for product in products %}
+								<article class="card produit">
+									<a href="{{ path('app_product_show', {'id': product.id}) }}">
+										{% for picture in product.gallery %}
+											{% if picture == product.gallery.first %}
+												<img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
+											{% endif %}
+										{% else %}
+											<i class="fa-solid fa-camera"></i>
+										{% endfor %}
+										<div class="card-img-overlay">
+											<h5 class="card-title">{{ product.name }}</h5>
+											<p class="card-text">{{ product.description }}</p>
+											<p class="card-text">{{ product.price }}€</p>
+										</div>
+									</a>
+								</article>
+							{% else %}
+								<p>aucun objet trouvé</p>
+							{% endfor %}
+						</section>
+						{# {% endfor %} #}
+					</section>
+				</div>
+			</div>
+		{% endblock %}

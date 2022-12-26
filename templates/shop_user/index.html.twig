@@ -1,53 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Boutique{% endblock %}
+{% block title %}Boutique
+{% endblock %}
 
 {% block body %}
-    <div class="blockPage">
-        <div class="shopUserView">
-            <h1>Nos produits</h1>
+	<div class="blockPage">
+		<div class="shopUserView">
+			<h1>Nos produits</h1>
 
-{# ajouter un fitre pour masquer les catégories non selectionnées #}
-            <nav>
-                <ul>
-                    {% for category in categories %}
-                        <li> <a href="#{{ category.id }}"> {{ category.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </nav>
+			{# ajouter un fitre pour masquer les catégories non selectionnées #}
+			<nav>
+				<ul>
+					{% for category in categories %}
+						<li>
+							<a href="#{{ category.id }}">
+								{{ category.name }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</nav>
 
-            <section class="categories">
-            {% for category in categories %}
-                <h2  id="{{ category.id }}" >{{ category.name }}<h2>
-                <section class="products">
+			<section class="categories">
+				{% for category in categories %}
+					<h2 id="{{ category.id }}">{{ category.name }}<h2>
 
-                    {% for product in products %}
-                        {% if category.id == product.category.id %}
-                            <article class="card produit">
-                                <a href="{{ path('app_product_show', {'id': product.id}) }}">
-                                    {% for picture in product.gallery %}
-                                        {% if picture == product.gallery.first %}
-                                            <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
-                                        {% endif %}
-                                        {% else %}
-                                            <i class="fa-solid fa-camera"></i>
-                                    {% endfor %}
-                                    <div class="card-img-overlay">
-                                    
-                                        <h5 class="card-title">{{ product.name }}</h5>
-                                    
-                                        <p class="card-text">{{ product.description }}</p>
-                                        <p class="card-text">{{ product.price }}€</p>
-                                    </div>
-                                </a>
-                            </article>
-                        {% endif %}
-                    {% else %}
-                        <p>aucun objet trouvé</p>
-                    {% endfor %}
-                    </section>
-                {% endfor %}
-            </section>
-        </div>
-    </div>
-{% endblock %}
+							<section class="products">
+								{% for product in products %}
+									{% if category.id == product.category.id %}
+										<article class="produit">
+											<a href="{{ path('app_product_show', {'id': product.id}) }}">
+												{% for picture in product.gallery %}
+													{% if picture == product.gallery.first %}
+														<img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
+													{% endif %}
+												{% else %}
+													<img src="https://cdn.stocksnap.io/img-thumbs/960w/christmas-cookies_HJLVSEICE7.jpg"></img>
+											{% endfor %}
+											<aside>
+
+												<h5>{{ product.name }}</h5>
+												{# <div>
+													<i class="fa-solid fa-cart-shopping"></i>
+													<p>{{ product.price }}€</p>
+												</div> #}
+
+
+												<p class="hidden">{{ product.description }}</p>
+											</aside>
+										</a>
+									</article>
+								{% endif %}
+							{% else %}
+								<p>aucun objet trouvé</p>
+							{% endfor %}
+						</section>
+					{% endfor %}
+				</section>
+			</div>
+		</div>
+	{% endblock %}

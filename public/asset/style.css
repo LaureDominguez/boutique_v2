@@ -2,40 +2,31 @@
 /************************* All ************************/
 
 :root {
-    --Xiketic: #03071E;
-    --DarkSienna: #370617;
-    --Rosewood: #6A040F;
-    --DarkRed: #9D0208;
-    --RossoCorsa: #D00000;
-    --Vermilion: #DC2F02;
-    --Persimmon: #E85D04;
-    --Tangerine: #F48C06;
-    --OrangeWeb: #FAA307;
-    --SelectiveYellow: #FFBA08;
+    --jaune: #ffd97b;
+    --marron: #A72700;
+    --orange: #C52E00;
+    --vert: #88AB75;
+
     --Shadow: 0 0 10px #3a3a3a88;
-    --Category: {{product.category.color}};
 }
 
 *{
     box-sizing: border-box;
-    transition-property: all;
-    transition-duration: .6s;
-    transition-timing-function: ease;
 }
 
 html, body {
     font-family: 'Lato', sans-serif;
-    color: var(--DarkRed);
+    color: var(--marron);
     cursor: default;
 }
 
 h4, h5, a, ul, li, th, td{
-    color: var(--DarkRed);
+    color: var(--marron);
     text-transform: capitalize;
 }
 
 h1, h2, h3, p{
-    color: var(--DarkRed);
+    color: var(--orange);
 }
 
 h1{
@@ -43,7 +34,7 @@ h1{
 }
 
 a, a:hover{
-    color: inherit !important;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -62,15 +53,11 @@ img{
     background-attachment: fixed;
 }
 
-.cat{
-    color: var(--Category) !important;
-}
-
 /************************* Nav **********************/
 
 .navbar{
-    background-color: var(--Xiketic);
-    opacity: 0.8;
+    background-color: var(--jaune);
+    opacity: 0.9;
     border-radius: 0 !important;
     position: fixed;
     top: 0;
@@ -78,22 +65,44 @@ img{
     z-index: 10;
 }
 
-.navbar li{
-    border-right: solid transparent;
-    border-left: solid transparent;
-    color: var(--Vermilion);
-    border-top: solid 1.2px transparent;
-    border-bottom: solid 1.2px transparent;
+.navbar a {
+    color: var(--marron) !important;
 }
 
-.navbar li:hover:not(.divider),
-.navbar li:active:not(.divider) {
-    color: var(--Persimmon);
-    background-color: rgba(255, 255, 255, 0.144);
-    border-top: solid 1.2px var(--Vermilion);
-    border-bottom: solid 1.2px var(--Vermilion);
-    opacity: 1;
-    box-shadow: var(--Shadow);
+.nav-item::before,
+.nav-item::after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--orange);
+  content: '';
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateY(-10px);
+}
+
+.nav-item::before {
+  top: 0;
+  transform: translateY(-10px);
+}
+
+.nav-item::after {
+  bottom: 0;
+  transform: translateY(10px);
+}
+
+.nav-item:hover:not(.divider, .dropdown li),
+.nav-item:focus:not(.divider, .dropdown li) {
+  color: var(--orange);
+}
+
+.nav-item:hover:not(.divider, .dropdown li)::before,
+.nav-item:focus:not(.divider, .dropdown li)::before,
+.nav-item:hover:not(.divider, .dropdown li)::after,
+.nav-item:focus:not(.divider, .dropdown li)::after {
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 /************************* Home *********************/
@@ -175,7 +184,6 @@ img{
 
 .blockContact {
     width: 50%;
-    color: var(--Persimmon);
     background-color: #fff;
     padding: 1rem;
     border-radius: 10px;
@@ -230,7 +238,6 @@ img{
 
 .loginPage .block {
     width: 30vw;
-    color: var(--Persimmon);
     background-color: #fff;
     padding: 1rem;
     border-radius: 10px;
@@ -243,22 +250,18 @@ img{
 }
 
 .btn:not(.nav .btn) {
-    border: solid 1px var(--Persimmon);
-    color: var(--Persimmon) !important;
+    color: var(--orange) !important;
+    border: solid 1px var(--orange);
 }
 
 .btn:hover:not(.nav .btn) {
-    color: var(--RossoCorsa) !important;
-    background-color: var(--DarkSienna);
-    box-shadow: var(--Shadow);
-    border-radius: 10px;
+    background-color: var(--jaune);
 }
 
 /****************************** User profil ***********************/
 
 .user {
     width: 80%;
-    color: var(--Persimmon);
     background-color: #fff;
     padding: 1rem;
     border-radius: 10px;
@@ -380,68 +383,67 @@ img{
 }
 
 .shopUserView .products{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: space-around;
-}
-
-.card-text:first-of-type {
-    max-width: 10rem;
-    max-height: 10rem;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .produit{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: space-around;
-    height: 11rem;
-    width: 11rem;
+    height: 15rem;
+    width: 15rem;
     margin: 1rem;
-    text-align: center;
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: 5%;
+    overflow: hidden;
 }
 
-.produit img, .produit i {
+.produit img {
     object-fit: cover;
-    height: 10rem;
-    width: 10rem;
+    height: 15rem;
+    width: 15rem;
 }
 
-.produit i {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.produit .card-img-overlay{
-    opacity: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #ffb9088f;
-    color: var(--RossoCorsa);
-    
-}
-
-.produit .card-img-overlay:hover {
+.produit aside{
     opacity: 1;
-    backdrop-filter: blur(5px);
+    background-color: var(--orange);
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    border: 1px solid transparent;
+    border-radius: 25px 25px 0 0;
+    overflow: hidden;
+    padding: 0.5rem 1rem 0;
+    text-align: center;
+    transform: translateY(50%);
+    transition: all 0.2s linear;
 }
 
-.produit .card-img-overlay h5,
-.produit .card-img-overlay p {
-    background-color: rgba(255, 255, 255, 0.453);
-    line-height: 12px;
-    letter-spacing: 1px;
-    margin: 0 0 10px;
-    border-radius: 10px;
-    padding: 10px 15px 8px;
-    box-shadow: 0 0 10px rgb(255, 255, 255);
+.produit h5{
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.produit p, .produit i {
+    color: var(--marron);
+}
+
+.hidden{
+    opacity: 0;
+}
+
+.produit aside div {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1rem;
+}
+
+.produit aside:hover {
+    transform: translateY(0);
+}
+
+.produit aside:hover > .hidden {
+    opacity: 1;
 }
 
 /****************************** Cart ***********************/
@@ -456,7 +458,7 @@ img{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: var(--OrangeWeb);
+    background-color: var(--orange);
     display: none;
 }
 
