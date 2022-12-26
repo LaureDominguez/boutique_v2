@@ -16,23 +16,14 @@ use App\Repository\GalleryRepository;
 #[Route('/product')]
 class ProductController extends AbstractController
 {
-    private ?CartRepository $cartRepository;
-
-    public function __construct(CartRepository $cartRepository)
+    public CartController $cartController;
+    public function __construct(CartController $cartController)
     {
-        $this->cartRepository = $cartRepository;
+        $this->cartController = $cartController;
     }
-
-    private function checkCart()
+    public function checkCart()
     {
-        $user = $this->getUser();
-        if ($user !== null) {
-            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
-            if (!empty($checkCart)) {
-                return true;
-            }
-        }
-        return false;
+        $this->checkCart = $this->cartController->checkCart();
     }
 ///////// Index /////////////////
 
