@@ -20,23 +20,28 @@
             {% for category in categories %}
                 <h2  id="{{ category.id }}" >{{ category.name }}<h2>
                 <section class="products">
+
                     {% for product in products %}
-                        <article class="card produit">
-                            <a href="{{ path('app_product_show', {'id': product.id}) }}">
-                                {% for picture in product.gallery %}
-                                    {% if picture == product.gallery.first %}
-                                        <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
-                                    {% endif %}
-                                    {% else %}
-                                        <i class="fa-solid fa-camera"></i>
-                                {% endfor %}
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title">{{ product.name }}</h5>
-                                    <p class="card-text">{{ product.description }}</p>
-                                    <p class="card-text">{{ product.price }}€</p>
-                                </div>
-                            </a>
-                        </article>
+                        {% if category.id == product.category.id %}
+                            <article class="card produit">
+                                <a href="{{ path('app_product_show', {'id': product.id}) }}">
+                                    {% for picture in product.gallery %}
+                                        {% if picture == product.gallery.first %}
+                                            <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
+                                        {% endif %}
+                                        {% else %}
+                                            <i class="fa-solid fa-camera"></i>
+                                    {% endfor %}
+                                    <div class="card-img-overlay">
+                                    
+                                        <h5 class="card-title">{{ product.name }}</h5>
+                                    
+                                        <p class="card-text">{{ product.description }}</p>
+                                        <p class="card-text">{{ product.price }}€</p>
+                                    </div>
+                                </a>
+                            </article>
+                        {% endif %}
                     {% else %}
                         <p>aucun objet trouvé</p>
                     {% endfor %}
