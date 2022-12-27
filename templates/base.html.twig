@@ -17,9 +17,11 @@
 			{# Google Font Lato #}
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+			<link
+			href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 			{# CSS #}
-			<link href="{{asset('./asset/style.css')}}" rel="stylesheet"> {{ encore_entry_link_tags('app') }}
+			<link href="{{asset('./asset/style.css')}}" rel="stylesheet">
+			{{ encore_entry_link_tags('app') }}
 
 		{% endblock %}
 
@@ -37,25 +39,25 @@
 		<header>
 			<nav class="navbar navbar-toggler">
 				<ul class="nav">
-					<li class="nav-item">
+					<li class="nav-item dropdown">
 						<a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
 					</li>
 					{% if is_granted("ROLE_ADMIN") %}
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_shop_admin') }}">Boutique-admin</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="{{ path('app_shop_user') }}">Boutique</a>
 						</li>
 					{% endif %}
-					<li class="nav-item">
+					<li class="nav-item dropdown">
 						<a class="nav-link" href="{{ path('app_shop_user') }}">Boutique</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item dropdown">
 						<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
 					</li>
 				</ul>
 
 				{% if not app.user %}
 					<ul class="nav">
-						<li>
+						<li class="nav-item dropdown">
 							<a class="btn" href="{{ path('app_login') }}" class="dropdown-item">Connexion</a>
 						</li>
 					</ul>
@@ -82,6 +84,7 @@
 				{% endif %}
 			</nav>
 		</header>
+
 		<main>
 			{% if not is_granted("ROLE_ADMIN") %}
 				{{ include('basket/display_cart.html.twig') }}

@@ -1,71 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}Produit
+{% endblock %}
 
 {% block body %}
-    <div class="blockPage">
-        <div class="shopUserView">
-            {% if is_granted("ROLE_ADMIN") %}
-                <style>
-                    .user{
-                        display: none;
-                    }
-                </style>
-                <div class="block-category">
-                    <h1>Produit : {{ product.name }}</h1>
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr>
-                                <th>#</th>
-                                <td>{{ product.id }}</td>
-                            </tr>
-                            <tr>
-                                <th>Nom</th>
-                                <td>{{ product.name }}</td>
-                            </tr>
-                            <tr>
-                                <th>Description</th>
-                                <td>{{ product.description }}</td>
-                            </tr>
-                            <tr>
-                                <th>Prix</th>
-                                <td>{{ product.price }}</td>
-                            </tr>
-                            <tr>
-                                <th>Image</th>
-                                <td>
-                                    {% for picture in product.gallery %}
-                                        <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}">
-                                    {% endfor %}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="groupe-button-option">
-                    <a class="btn btn-sm" href="{{ path('app_shop_admin') }}">Retour aux catégories</a>
+	<div class="blockPage">
+		<div
+			class="shopUserView">
 
-                    <a class="btn btn-sm" href="{{ path('app_product_index') }}">Retour à la liste</a>
+			{# Admin view #}
+			{% if is_granted("ROLE_ADMIN") %}
+				<style>
+					.user {
+						display: none;
+					}
+				</style>
 
-                    <a class="btn btn-sm" href="{{ path('app_product_edit', {'id': product.id}) }}">Modifier</a>
+				<div class="block-category">
+					<h1>Produit :
+						{{ product.name }}</h1>
+					<table class="table table-hover">
+						<tbody>
+							<tr>
+								<th>#</th>
+								<td>{{ product.id }}</td>
+							</tr>
+							<tr>
+								<th>Nom</th>
+								<td>{{ product.name }}</td>
+							</tr>
+							<tr>
+								<th>Description</th>
+								<td>{{ product.description }}</td>
+							</tr>
+							<tr>
+								<th>Prix</th>
+								<td>{{ product.price }}</td>
+							</tr>
+							<tr>
+								<th>Image</th>
+								<td>
+									{% for picture in product.gallery %}
+										<img src="{{ asset ('uploads/images_directory/'~picture.picture) }}">
+									{% endfor %}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="groupe-button-option">
+					<a class="btn btn-sm" href="{{ path('app_shop_admin') }}">Retour aux catégories</a>
 
-                    {{ include('product/_delete_form.html.twig') }}
-                </div>
+					<a class="btn btn-sm" href="{{ path('app_product_index') }}">Retour à la liste</a>
 
-            {% endif %}
+					<a class="btn btn-sm" href="{{ path('app_product_edit', {'id': product.id}) }}">Modifier</a>
 
-            <div class="user">
-                <h1>{{ product.name }}</h1>
-                <p>{{ product.description }}</p>
-                <p>{{ product.price }}</p>
-                    <form method="post" action="{{ path('app_cart_new', {'id': product.id}) }}">
-                        <input name="quantity" class="form-control" type="number" value="1" min="1" max="10">
-                        <button class="btn">Ajouter</button>
-                    </form>
-                {% for picture in product.gallery %}
-                    <img src="{{ asset ('uploads/images_directory/'~picture.picture) }}">
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+					{{ include('product/_delete_form.html.twig') }}
+				</div>
+
+			{% endif %}
+
+			{# User view #}
+			<div class="user">
+				<h1>{{ product.name }}</h1>
+				<p>{{ product.description }}</p>
+				<p>{{ product.price }}€</p>
+				<form class="add-cart" method="post" action="{{ path('app_cart_new', {'id': product.id})}}">
+					<button class="btn">Ajouter</button>
+					<input name="quantity" class="form-control" type="number" value="1" min="1" max="10">
+				</form>
+				{% for picture in product.gallery %}
+					<img src="{{ asset ('uploads/images_directory/'~picture.picture) }}">
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 {% endblock %}

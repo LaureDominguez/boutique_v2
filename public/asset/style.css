@@ -58,24 +58,34 @@ img{
     background-attachment: fixed;
 }
 
+/************************* Erase Bootstrap style **********************/
+
+.navbar-toggler{
+    border-radius: 0;
+}
+
+.navbar-toggler a, .navbar-toggler a:hover, .navbar-toggler a:focus{
+    color: inherit;
+}
+
+.btn, .btn:hover{
+    color: inherit;
+    border: inherit;
+    background-color: inherit;
+}
+
 /************************* Nav **********************/
 
 .navbar{
     background-color: var(--jaune);
     opacity: 0.9;
-    border-radius: 0 !important;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 10;
+    z-index: 50;
 }
 
 /* marche toujours pas correctement */
-
-.navbar a {
-    color: var(--marron) !important;
-}
-
 .nav-item::before,
 .nav-item::after {
     position: absolute;
@@ -255,7 +265,6 @@ img{
 }
 
 .btn:not(.nav .btn, .produit .btn) {
-    color: var(--orange) !important;
     border: solid 1px var(--orange);
 }
 
@@ -266,7 +275,7 @@ img{
 /****************************** User profil ***********************/
 
 .user {
-    width: 80%;
+    /* width: 80%; */
     background-color: #fff;
     padding: 1rem;
     border-radius: 10px;
@@ -465,15 +474,15 @@ img{
     overflow: hidden;
 }
 
-.more button{
+.more .btn{
     color: var(--orange);
     border: solid 1px var(--orange);
 }
 
-.more button:hover{
-    background-color: var(--orange) !important;
-    border: solid 1px var(--orange) !important;
-    color: var(--jaune) !important;
+.more .btn:hover{
+    background-color: var(--orange) ;
+    border: solid 1px var(--orange) ;
+    color: var(--jaune) ;
 }
 
 .produit .overlay{
@@ -530,6 +539,16 @@ img{
     opacity: 1;
 }
 
+/****************************** Products - User View ***********************/
+
+.shopUserView .add-cart {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.shopUserView .add-cart .form-control {
+    width: auto;
+}
 
 /****************************** Cart ***********************/
 
