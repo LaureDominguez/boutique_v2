@@ -10,9 +10,9 @@
 
 			{# ajouter un fitre pour masquer les catégories non selectionnées #}
 			<nav>
-				<ul>
+				<ul class="nav_list">
 					{% for category in categories %}
-						<li>
+						<li class="nav_list_item">
 							<a href="#{{ category.id }}">
 								{{ category.name }}</a>
 						</li>
@@ -29,29 +29,34 @@
 									{% if category.id == product.category.id %}
 										<article class="produit">
 											<a href="{{ path('app_product_show', {'id': product.id}) }}">
-												{% for picture in product.gallery %}
-													{% if picture == product.gallery.first %}
-														<img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
-													{% endif %}
-												{% else %}
-													<img src="https://cdn.stocksnap.io/img-thumbs/960w/christmas-cookies_HJLVSEICE7.jpg"></img>
-											{% endfor %}
-											<aside>
+												<figure>
+													{% for picture in product.gallery %}
+														{% if picture == product.gallery.first %}
+															<img src="{{ asset ('uploads/images_directory/'~picture.picture) }}" class="card-img" alt="{{ product.name }}">
+														{% endif %}
+													{% else %}
+														<img src="https://cdn.stocksnap.io/img-thumbs/960w/christmas-cookies_HJLVSEICE7.jpg"></img>
+													{% endfor %}
+													<figcaption class="more">
+														<p>{{ product.description }}</p>
+														<button type="button" href="{{ path('app_product_show', {'id': product.id}) }}" class="btn">Voir</button>
+													</figcaption>
+												</figure>
 
+											<aside class="overlay">
 												<h5>{{ product.name }}</h5>
-												{# <div>
-													<i class="fa-solid fa-cart-shopping"></i>
+												<div class="hidden">
 													<p>{{ product.price }}€</p>
-												</div> #}
-
-
-												<p class="hidden">{{ product.description }}</p>
+													<button type="button" class="btn">
+														<i class="fa-solid fa-bag-shopping"></i>
+													</button>
+												</div>
 											</aside>
 										</a>
 									</article>
 								{% endif %}
 							{% else %}
-								<p>aucun objet trouvé</p>
+								<p>aucun produit dans ce rayon</p>
 							{% endfor %}
 						</section>
 					{% endfor %}
