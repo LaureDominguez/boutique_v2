@@ -27,6 +27,7 @@ h4, h5, a, ul, li, th, td{
 
 h1, h2, h3, p{
     color: var(--orange);
+    text-transform: capitalize;
 }
 
 h1{
@@ -253,12 +254,12 @@ img{
     margin-bottom: 1rem;
 }
 
-.btn:not(.nav .btn, .hidden .btn) {
+.btn:not(.nav .btn, .produit .btn) {
     color: var(--orange) !important;
     border: solid 1px var(--orange);
 }
 
-.btn:hover:not(.nav .btn, .hidden .btn) {
+.btn:hover:not(.nav .btn, .produit .btn) {
     background-color: var(--jaune);
 }
 
@@ -378,35 +379,35 @@ img{
     border-radius: 5px;
 }
 
-/* animation navbar */
 
-.nav_list_item {
-    height: 100%;
-    overflow: hidden;
-}
+/* animation shop nav */
 
-.nav_list li {
-    padding: 15px 0;
-    position: relative;
-}
+    .nav_list_item {
+        height: 100%;
+        overflow: hidden;
+    }
 
-.nav_list li::before {
-    content: '';
-    position: absolute;
-    height: 2px;
-    width: 0px;
-    bottom: 0;
-    left: 0;
-    background: var(--orange); 
-    transition: all .5s ease;
-}
+    .nav_list li {
+        padding: 15px 0;
+        position: relative;
+    }
 
-.nav_list li:hover:before {
-    width: 100%;
-}
+    .nav_list li::before {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 0px;
+        bottom: 0;
+        left: 0;
+        background: var(--orange); 
+        transition: all .5s ease;
+    }
+
+    .nav_list li:hover:before {
+        width: 100%;
+    }
 
 /* fin animation */
-
 
 
 .shopUserView .products{
@@ -429,7 +430,6 @@ img{
     height: 15rem;
     width: 15rem;
     position: relative;
-    z-index: 10;
 }
 
 .produit figure:hover > img {
@@ -456,7 +456,6 @@ img{
     text-align: justify;
     opacity: 0;
     transition: all .5s ease;
-    z-index: 20;
 }
 
 .more p {
@@ -464,6 +463,17 @@ img{
     color: var(--marron);
     max-height: 8vh;
     overflow: hidden;
+}
+
+.more button{
+    color: var(--orange);
+    border: solid 1px var(--orange);
+}
+
+.more button:hover{
+    background-color: var(--orange) !important;
+    border: solid 1px var(--orange) !important;
+    color: var(--jaune) !important;
 }
 
 .produit .overlay{
@@ -481,7 +491,6 @@ img{
     text-align: center;
     transform: translateY(50%);
     transition: all 0.2s linear;
-    z-index: 20;
 }
 
 .produit h5{
@@ -489,9 +498,21 @@ img{
     color: #fff;
 }
 
-.produit p:not(.more p), .produit button {
+.produit .overlay p {
     font-size: 1rem;
     color: #fff;
+}
+
+.produit .overlay button {
+    font-size: 1rem;
+    color: var(--orange);
+    background-color: #fff;
+}
+
+.produit .overlay button:hover{
+    background-color: var(--jaune);
+    color: var(--orange);
+    transition: all 0.2s ease;
 }
 
 .hidden{
@@ -509,10 +530,6 @@ img{
     opacity: 1;
 }
 
-.produit .btn:hover{
-    background-color: var(--orange);
-    color: var(--orange);
-}
 
 /****************************** Cart ***********************/
 
