@@ -21,9 +21,6 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $other;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $color = null;
-
     public function __construct()
     {
         $this->other = new ArrayCollection();
@@ -72,18 +69,6 @@ class Category
                 $other->setCategory(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getColor(): ?string
-    {
-        return $this->color;
-    }
-
-    public function setColor(?string $color): self
-    {
-        $this->color = $color;
 
         return $this;
     }

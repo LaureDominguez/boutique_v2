@@ -8,10 +8,12 @@
 		<section class="shopAdminView">
 			<h1>Gérez des pâtes !</h1>
 			<div>
+
 				<article class="block-category">
 					<h2>
 						<a href="{{ path('app_category_index') }}">Toutes les catégories</a>
-						:</h2>
+					</h2>
+
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -20,19 +22,26 @@
 								<th scope="col">Actions</th>
 							</tr>
 						</thead>
+
 						<tbody class="table-group-divider">
 							{% for category in categories %}
 								<tr>
 									<th scope="row">
-										<a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.id }}</a>
+										{# <a href="{{ path('app_category_show', {'id': category.id}) }}"> #}
+										{{ category.id }}
+										{# </a> #}
 									</th>
 									<td class="cat">
-										<a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a>
+										{# <a href="{{ path('app_category_show', {'id': category.id}) }}"> #}
+										{{ category.name }}
+										{# </a> #}
 									</td>
+
 									<td class="groupe-button-pic">
 										<a class="btn btn-sm" href="{{ path('app_category_edit', {'id': category.id}) }}">
 											<i class="fa-solid fa-pen-to-square" title="modifier"></i>
 										</a>
+
 										<form method="post" action="{{ path('app_category_delete', {'id': category.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ? Attention, cela supprimera tous les articles liés.');">
 											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
 											<button class="btn btn-sm">
@@ -49,16 +58,16 @@
 								</tr>
 							{% endfor %}
 						</tbody>
+
 					</table>
 					<div class="add-button">
-						<a class="btn btn-sm" href="{{ path('app_category_index') }}">Voir les catégories</a>
 						<a class="btn btn-sm" href="{{ path('app_category_new') }}">Ajouter une catégorie</a>
 					</div>
 				</article>
 
+
 				<article class="block-category">
 					<h2>Tous les produits :</h2>
-
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -106,4 +115,5 @@
 			<a class="btn btn-sm" href="{{ path('app_product_new') }}">Ajouter un article</a>
 		</div>
 	</article>
+
 </div></section></div>{% endblock %}

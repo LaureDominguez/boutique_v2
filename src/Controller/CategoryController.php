@@ -15,23 +15,14 @@ use App\Repository\ProductRepository;
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
-    private ?CartRepository $cartRepository;
-
-    public function __construct(CartRepository $cartRepository)
+    public CartController $cartController;
+    public function __construct(CartController $cartController)
     {
-        $this->cartRepository = $cartRepository;
+        $this->cartController = $cartController;
     }
-
-    private function checkCart()
+    public function checkCart()
     {
-        $user = $this->getUser();
-        if ($user !== null) {
-            $checkCart = $this->cartRepository->findBy(['user' => $this->getUser()]);
-            if (!empty($checkCart)) {
-                return true;
-            }
-        }
-        return false;
+        $this->checkCart = $this->cartController->checkCart();
     }
 
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
@@ -93,6 +84,19 @@ class CategoryController extends AbstractController
             'display_cart' => false,
         ]);
     }
+
+    // #[Route('admin/{id}', name: 'app_category_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Category $category, CategoryRepository $categoryRepository): Response
+    // {
+    //     $form = $this->createForm(CategoryType::class, $category);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $categoryRepository->save($category, true);
+
+    //         return $this->redirectToRoute('app_shop_admin', [], Response::HTTP_SEE_OTHER);
+    //     };
+    // }
 
     #[Route('admin/{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response

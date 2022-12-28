@@ -47,6 +47,7 @@ class UserController extends AbstractController
             $user->setPassword($passHasher->hashPassword($user, $user->getPassword()));
             $userRepository->save($user, true);
 
+            $this->addFlash('success', 'Le compte a bien été créé !');
             return $this->redirectToRoute('app_login');
         }
 
