@@ -85,7 +85,6 @@ img{
     z-index: 50;
 }
 
-/* marche toujours pas correctement */
 .nav-item::before,
 .nav-item::after {
     position: absolute;
@@ -389,16 +388,25 @@ img{
 }
 
 
-/* animation shop nav */
+/* shopnav */
 
     .nav_list_item {
         height: 100%;
         overflow: hidden;
     }
 
+    .nav_list h4 {
+        line-height: 2.5rem;
+        transition: all .2s linear;
+    }
+
     .nav_list li {
         padding: 15px 0;
         position: relative;
+    }
+
+    .nav_list h4:hover {
+        font-size: 1.8rem;
     }
 
     .nav_list li::before {
@@ -416,7 +424,7 @@ img{
         width: 100%;
     }
 
-/* fin animation */
+/* fin */
 
 
 .shopUserView .products{
@@ -439,11 +447,11 @@ img{
     height: 15rem;
     width: 15rem;
     position: relative;
+    transition: all .5s ease;
 }
 
 .produit figure:hover > img {
     transform: scale(1.2);
-    transition: all .5s ease;
 }
 
 .produit figure:hover > figcaption {
@@ -477,6 +485,7 @@ img{
 .more .btn{
     color: var(--orange);
     border: solid 1px var(--orange);
+    transition: all .2s ease;
 }
 
 .more .btn:hover{

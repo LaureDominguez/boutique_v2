@@ -6,15 +6,17 @@
 {% block body %}
 	<div class="blockPage">
 		<div class="shopUserView">
-			<h1>Nos produits</h1>
+			<h1>les produits</h1>
 
 			{# ajouter un fitre pour masquer les catégories non selectionnées #}
 			<nav>
 				<ul class="nav_list">
 					{% for category in categories %}
 						<li class="nav_list_item">
-							<a href="#{{ category.id }}">
-								{{ category.name }}</a>
+							<h4>
+								<a href="#{{ category.id }}">
+									{{ category.name }}</a>
+							</h4>
 						</li>
 					{% endfor %}
 				</ul>
